@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="1f9c5b88-dbd8-4bf0-99b2-fe81a1f4dbfb" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="C:\msworkspace\TFS\Indigo Integrations\Main\Source\Veneka.Indigo.Integration.MockServices\packages\v1_2_1.wsdl" Protocol="file" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="mytxtbuddySoapApi.wsdl" MetadataType="Wsdl" ID="7277267f-a2d0-496a-bc18-9fe898afe5b1" SourceId="1" SourceUrl="file:///C:/msworkspace/TFS/Indigo Integrations/Main/Source/Veneka.Indigo.Integration.MockServices/packages/v1_2_1.wsdl" />
+    <MetadataFile FileName="v1_2.xsd" MetadataType="Schema" ID="600cc7e4-1dc7-4449-96b7-6a613063824d" SourceId="1" SourceUrl="file:///C:/msworkspace/TFS/Indigo Integrations/Main/Source/Veneka.Indigo.Integration.MockServices/packages/v1_2.xsd" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

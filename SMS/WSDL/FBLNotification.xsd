@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema elementFormDefault="qualified" targetNamespace="http://new.webservice.namespace" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:ns="http://www.fidelitybank.com" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://new.webservice.namespace" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <xsd:element ibmSchExtn:docRoot="true" name="SendSms_Req">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="SenderChannel"/>
+        <xsd:element name="Message">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:maxLength value="155"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="RecipientPhoneNumber">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:pattern value="[0-9]{12}"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element ibmSchExtn:docRoot="true" name="SendSms_Resp">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="message"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element ibmSchExtn:docRoot="true" name="SendEmail_Req">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="FromEmail"/>
+        <xsd:element name="SenderChannel"/>
+        <xsd:element name="Subject"/>
+        <xsd:element name="Recipient"/>
+        <xsd:element name="CC"/>
+        <xsd:element name="BCC"/>
+        <xsd:element name="Message"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element ibmSchExtn:docRoot="true" name="SendEmail_Resp">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="message"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

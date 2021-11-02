@@ -1,0 +1,239 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{37A33F90-279D-4835-9EAC-3A9A6EC354DA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Veneka.Indigo.Integration.Fidelity</RootNamespace>
+    <AssemblyName>Veneka.Indigo.Integration.Fidelity</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Common.Logging, Version=3.4.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>refs\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging.Core, Version=3.4.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>refs\Common.Logging.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging.Log4Net1213, Version=3.3.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>refs\Common.Logging.Log4Net1213.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>refs\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Veneka.Indigo.Integration, Version=2.1.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Migration\C Root\Repos\Indigo214\Fid\indigoCardIssuingApplication\Veneka.Indigo.Integration\bin\Debug\Veneka.Indigo.Integration.dll</HintPath>
+    </Reference>
+    <Reference Include="Veneka.Indigo.Integration.EMPDebitMerged">
+      <HintPath>refs\Veneka.Indigo.Integration.EMPDebitMerged.dll</HintPath>
+    </Reference>
+    <Reference Include="Veneka.Indigo.Integration.ProductPrinting, Version=2.1.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>refs\Veneka.Indigo.Integration.ProductPrinting.dll</HintPath>
+    </Reference>
+    <Reference Include="Veneka.Module.CIFIntegration">
+      <HintPath>refs\Veneka.Module.CIFIntegration.dll</HintPath>
+    </Reference>
+    <Reference Include="Veneka.Module.CR2BankWorld, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>refs\Veneka.Module.CR2BankWorld.dll</HintPath>
+    </Reference>
+    <Reference Include="Veneka.Module.CR2CardWorld, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>refs\Veneka.Module.CR2CardWorld.dll</HintPath>
+    </Reference>
+    <Reference Include="Veneka.Module.GviveAPI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>refs\Veneka.Module.GviveAPI.dll</HintPath>
+    </Reference>
+    <Reference Include="Veneka.Module.IntegrationDataControl, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>refs\Veneka.Module.IntegrationDataControl.dll</HintPath>
+    </Reference>
+    <Reference Include="Veneka.Module.OracleFlexcube">
+      <HintPath>..\..\..\..\Module\Veneka.Module.OracleFlexcube\bin\Debug\Veneka.Module.OracleFlexcube.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BankWorld\BankWorldWebService.cs" />
+    <Compile Include="BranchFile\FileGenerator.cs" />
+    <Compile Include="BranchFile\Objects\DataRecord.cs" />
+    <Compile Include="BranchFile\Objects\HeaderRecord.cs" />
+    <Compile Include="BranchFile\Objects\TrailerRecord.cs" />
+    <Compile Include="CardObject.cs" />
+    <Compile Include="CardWorld\CardWorld.cs" />
+    <Compile Include="DAL\DefaultDataDAL.cs" />
+    <Compile Include="DAL\ValidationDAL.cs" />
+    <Compile Include="FidelityCBS.cs" />
+    <Compile Include="FidelityCR2CMS.cs" />
+    <Compile Include="FidelityGOGCBS.cs" />
+    <Compile Include="FidelityGoGFundsLoadCBS.cs" />
+    <Compile Include="FidelityMasterCardCBS.cs" />
+    <Compile Include="FidelityMELCOMCBS.cs" />
+    <Compile Include="FidelityMasterCardFundsLoadCBS.cs" />
+    <Compile Include="FidelityMELCOMFundsLoadCBS.cs" />
+    <Compile Include="FidelityNICMSMerged.cs" />
+    <Compile Include="FidelityNS.cs" />
+    <Compile Include="FidelityCPS.cs" />
+    <Compile Include="FidelityHSM.cs" />
+    <Compile Include="Flexcube\FlexcubeWebService.cs" />
+    <Compile Include="Flexcube\MasterCardFlexcubeWebService.cs" />
+    <Compile Include="Flexcube\MelcomFlexcubeWebService.cs" />
+    <Compile Include="Objects\Customer.cs" />
+    <Compile Include="Objects\ProductSequenceCount.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\DreamovalSMSService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\FBLNotificationService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="SMS\Inspector\LogClientBehaviour.cs" />
+    <Compile Include="SMS\Inspector\MessageInspector.cs" />
+    <Compile Include="SMS\SMSWebService.cs" />
+    <Compile Include="Util\Categories.cs" />
+    <Compile Include="Util\FileRecord.cs" />
+    <Compile Include="Util\FileWriter.cs" />
+    <Compile Include="Util\SequenceNumberDAL.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\DreamovalSMSService\mytxtbuddySoapApi.wsdl" />
+    <None Include="Service References\DreamovalSMSService\v1_2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DreamovalSMSService\Veneka.Indigo.Integration.Fidelity.DreamovalSMSService.contactInfo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DreamovalSMSService\Veneka.Indigo.Integration.Fidelity.DreamovalSMSService.groupInfo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DreamovalSMSService\Veneka.Indigo.Integration.Fidelity.DreamovalSMSService.messageInfo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DreamovalSMSService\Veneka.Indigo.Integration.Fidelity.DreamovalSMSService.messageResponseInfo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\FBLNotificationService\FBLNotification.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\FBLNotificationService\FBLNotification_1.wsdl" />
+    <None Include="Service References\FBLNotificationService\Veneka.Indigo.Integration.Fidelity.FBLNotificationService.SendEmail_Resp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\FBLNotificationService\Veneka.Indigo.Integration.Fidelity.FBLNotificationService.SendSms_Resp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="SMS\WSDL\FBLNotification_1.wsdl" />
+    <None Include="SMS\WSDL\v1_2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="SMS\WSDL\v1_2_1.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="PPF\" />
+    <Folder Include="Utility\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Veneka.Indigo.Integration.FileLoader.dll" />
+    <Content Include="Resources\Veneka.Module.CR2BankWorld.dll" />
+    <Content Include="Resources\Veneka.Module.CR2CardWorld.dll" />
+    <Content Include="Resources\Veneka.Module.FlatFile.dll" />
+    <Content Include="Resources\Veneka.Module.IntegrationDataControl.dll" />
+    <Content Include="Resources\Veneka.Module.OracleFlexcube.dll" />
+    <Content Include="Resources\Veneka.Module.ThalesHSM.dll" />
+    <None Include="Service References\FBLNotificationService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\FBLNotificationService\configuration.svcinfo" />
+    <None Include="Service References\FBLNotificationService\configuration91.svcinfo" />
+    <None Include="SMS\WSDL\FBLNotification.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DreamovalSMSService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\DreamovalSMSService\configuration.svcinfo" />
+    <None Include="Service References\DreamovalSMSService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\DreamovalSMSService\" />
+    <WCFMetadataStorage Include="Service References\FBLNotificationService\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

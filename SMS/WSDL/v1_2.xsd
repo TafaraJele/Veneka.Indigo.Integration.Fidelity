@@ -1,0 +1,487 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.fidelitybank.com/dreamoval/sendsms/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.fidelitybank.com/dreamoval/sendsms/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xs:element ibmSchExtn:docRoot="true" name="addContact" type="tns:addContact"/>
+  <xs:element ibmSchExtn:docRoot="true" name="addContactResponse" type="tns:addContactResponse"/>
+  <xs:element ibmSchExtn:docRoot="true" name="addContactsToGroups" type="tns:addContactsToGroups"/>
+  <xs:element ibmSchExtn:docRoot="true" name="addContactsToGroupsResponse" type="tns:addContactsToGroupsResponse"/>
+  <xs:element ibmSchExtn:docRoot="true" name="addGroup" type="tns:addGroup"/>
+  <xs:element ibmSchExtn:docRoot="true" name="addGroupResponse" type="tns:addGroupResponse"/>
+  <xs:element ibmSchExtn:docRoot="true" name="checkBalance" type="tns:checkBalance"/>
+  <xs:element ibmSchExtn:docRoot="true" name="checkBalanceResponse" type="tns:checkBalanceResponse"/>
+  <xs:element ibmSchExtn:docRoot="true" name="countContacts" type="tns:countContacts"/>
+  <xs:element ibmSchExtn:docRoot="true" name="countContactsResponse" type="tns:countContactsResponse"/>
+  <xs:element ibmSchExtn:docRoot="true" name="countGroupContacts" type="tns:countGroupContacts"/>
+  <xs:element ibmSchExtn:docRoot="true" name="countGroupContactsResponse" type="tns:countGroupContactsResponse"/>
+  <xs:element ibmSchExtn:docRoot="true" name="countGroups" type="tns:countGroups"/>
+  <xs:element ibmSchExtn:docRoot="true" name="countGroupsResponse" type="tns:countGroupsResponse"/>
+  <xs:element ibmSchExtn:docRoot="true" name="countMessages" type="tns:countMessages"/>
+  <xs:element ibmSchExtn:docRoot="true" name="countMessagesResponse" type="tns:countMessagesResponse"/>
+  <xs:element ibmSchExtn:docRoot="true" name="editContact" type="tns:editContact"/>
+  <xs:element ibmSchExtn:docRoot="true" name="editContactResponse" type="tns:editContactResponse"/>
+  <xs:element ibmSchExtn:docRoot="true" name="editGroup" type="tns:editGroup"/>
+  <xs:element ibmSchExtn:docRoot="true" name="editGroupResponse" type="tns:editGroupResponse"/>
+  <xs:element ibmSchExtn:docRoot="true" name="getContacts" type="tns:getContacts"/>
+  <xs:element ibmSchExtn:docRoot="true" name="getContactsResponse" type="tns:getContactsResponse"/>
+  <xs:element ibmSchExtn:docRoot="true" name="getGroupContacts" type="tns:getGroupContacts"/>
+  <xs:element ibmSchExtn:docRoot="true" name="getGroupContactsResponse" type="tns:getGroupContactsResponse"/>
+  <xs:element ibmSchExtn:docRoot="true" name="getGroups" type="tns:getGroups"/>
+  <xs:element ibmSchExtn:docRoot="true" name="getGroupsResponse" type="tns:getGroupsResponse"/>
+  <xs:element ibmSchExtn:docRoot="true" name="getMessageStatusesByBatch" type="tns:getMessageStatusesByBatch"/>
+  <xs:element ibmSchExtn:docRoot="true" name="getMessageStatusesByBatchResponse" type="tns:getMessageStatusesByBatchResponse"/>
+  <xs:element ibmSchExtn:docRoot="true" name="getMessageStatusesByReference" type="tns:getMessageStatusesByReference"/>
+  <xs:element ibmSchExtn:docRoot="true" name="getMessageStatusesByReferenceResponse" type="tns:getMessageStatusesByReferenceResponse"/>
+  <xs:element ibmSchExtn:docRoot="true" name="getMessages" type="tns:getMessages"/>
+  <xs:element ibmSchExtn:docRoot="true" name="getMessagesResponse" type="tns:getMessagesResponse"/>
+  <xs:element ibmSchExtn:docRoot="true" name="getSenderNames" type="tns:getSenderNames"/>
+  <xs:element ibmSchExtn:docRoot="true" name="getSenderNamesResponse" type="tns:getSenderNamesResponse"/>
+  <xs:element ibmSchExtn:docRoot="true" name="removeContacts" type="tns:removeContacts"/>
+  <xs:element ibmSchExtn:docRoot="true" name="removeContactsFromGroup" type="tns:removeContactsFromGroup"/>
+  <xs:element ibmSchExtn:docRoot="true" name="removeContactsFromGroupResponse" type="tns:removeContactsFromGroupResponse"/>
+  <xs:element ibmSchExtn:docRoot="true" name="removeContactsResponse" type="tns:removeContactsResponse"/>
+  <xs:element ibmSchExtn:docRoot="true" name="removeGroups" type="tns:removeGroups"/>
+  <xs:element ibmSchExtn:docRoot="true" name="removeGroupsResponse" type="tns:removeGroupsResponse"/>
+  <xs:element ibmSchExtn:docRoot="true" name="resendVerificationMail" type="tns:resendVerificationMail"/>
+  <xs:element ibmSchExtn:docRoot="true" name="resendVerificationMailResponse" type="tns:resendVerificationMailResponse"/>
+  <xs:element ibmSchExtn:docRoot="true" name="resetPassword" type="tns:resetPassword"/>
+  <xs:element ibmSchExtn:docRoot="true" name="resetPasswordResponse" type="tns:resetPasswordResponse"/>
+  <xs:element ibmSchExtn:docRoot="true" name="sendMessage" type="tns:sendMessage"/>
+  <xs:element ibmSchExtn:docRoot="true" name="sendMessageContacts" type="tns:sendMessageContacts"/>
+  <xs:element ibmSchExtn:docRoot="true" name="sendMessageContactsResponse" type="tns:sendMessageContactsResponse"/>
+  <xs:element ibmSchExtn:docRoot="true" name="sendMessageGroups" type="tns:sendMessageGroups"/>
+  <xs:element ibmSchExtn:docRoot="true" name="sendMessageGroupsResponse" type="tns:sendMessageGroupsResponse"/>
+  <xs:element ibmSchExtn:docRoot="true" name="sendMessageResponse" type="tns:sendMessageResponse"/>
+  <xs:element ibmSchExtn:docRoot="true" name="sendMessageVerbose" type="tns:sendMessageVerbose"/>
+  <xs:element ibmSchExtn:docRoot="true" name="sendMessageVerboseResponse" type="tns:sendMessageVerboseResponse"/>
+  <xs:element ibmSchExtn:docRoot="true" name="signup" type="tns:signup"/>
+  <xs:element ibmSchExtn:docRoot="true" name="signupResponse" type="tns:signupResponse"/>
+  <xs:element ibmSchExtn:docRoot="true" name="viewContact" type="tns:viewContact"/>
+  <xs:element ibmSchExtn:docRoot="true" name="viewContactResponse" type="tns:viewContactResponse"/>
+  <xs:element ibmSchExtn:docRoot="true" name="viewGroup" type="tns:viewGroup"/>
+  <xs:element ibmSchExtn:docRoot="true" name="viewGroupResponse" type="tns:viewGroupResponse"/>
+  <xs:complexType name="getGroupContacts">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="groupId" type="xs:string"/>
+      <xs:element name="start" type="xs:int"/>
+      <xs:element name="pageSize" type="xs:int"/>
+      <xs:element minOccurs="0" name="username" type="xs:string"/>
+      <xs:element minOccurs="0" name="password" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getGroupContactsResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:contactInfo"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="contactInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="email" type="xs:string"/>
+      <xs:element minOccurs="0" name="firstName" type="xs:string"/>
+      <xs:element minOccurs="0" name="gender" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="groups" nillable="true" type="tns:groupSummary"/>
+      <xs:element minOccurs="0" name="id" type="xs:string"/>
+      <xs:element minOccurs="0" name="lastName" type="xs:string"/>
+      <xs:element minOccurs="0" name="mobile" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="groupSummary">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="id" type="xs:string"/>
+      <xs:element minOccurs="0" name="name" type="xs:string"/>
+      <xs:element name="size" type="xs:int"/>
+      <xs:element minOccurs="0" name="text" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getContacts">
+    <xs:sequence>
+      <xs:element name="start" type="xs:int"/>
+      <xs:element name="pageSize" type="xs:int"/>
+      <xs:element minOccurs="0" name="username" type="xs:string"/>
+      <xs:element minOccurs="0" name="password" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getContactsResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:contactInfo"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="addContact">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="firstName" type="xs:string"/>
+      <xs:element minOccurs="0" name="lastName" type="xs:string"/>
+      <xs:element minOccurs="0" name="gender" type="xs:string"/>
+      <xs:element minOccurs="0" name="mobile" type="xs:string"/>
+      <xs:element minOccurs="0" name="email" type="xs:string"/>
+      <xs:element minOccurs="0" name="username" type="xs:string"/>
+      <xs:element minOccurs="0" name="password" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="addContactResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:contactInfo"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="countMessages">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="username" type="xs:string"/>
+      <xs:element minOccurs="0" name="password" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="countMessagesResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="removeContactsFromGroup">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="contactId" type="xs:string"/>
+      <xs:element minOccurs="0" name="groupId" type="xs:string"/>
+      <xs:element minOccurs="0" name="username" type="xs:string"/>
+      <xs:element minOccurs="0" name="password" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="removeContactsFromGroupResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getGroups">
+    <xs:sequence>
+      <xs:element name="start" type="xs:int"/>
+      <xs:element name="pageSize" type="xs:int"/>
+      <xs:element minOccurs="0" name="username" type="xs:string"/>
+      <xs:element minOccurs="0" name="password" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getGroupsResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:groupInfo"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="groupInfo">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="contacts" nillable="true" type="tns:contactInfo"/>
+      <xs:element minOccurs="0" name="id" type="xs:string"/>
+      <xs:element minOccurs="0" name="name" type="xs:string"/>
+      <xs:element name="size" type="xs:long"/>
+      <xs:element minOccurs="0" name="text" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="editGroup">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="groupId" type="xs:string"/>
+      <xs:element minOccurs="0" name="name" type="xs:string"/>
+      <xs:element minOccurs="0" name="username" type="xs:string"/>
+      <xs:element minOccurs="0" name="password" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="editGroupResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:groupInfo"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getMessageStatusesByBatch">
+    <xs:sequence>
+      <xs:element name="start" type="xs:int"/>
+      <xs:element name="pageSize" type="xs:int"/>
+      <xs:element minOccurs="0" name="batchId" type="xs:string"/>
+      <xs:element minOccurs="0" name="username" type="xs:string"/>
+      <xs:element minOccurs="0" name="password" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getMessageStatusesByBatchResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:messageResponseInfo"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="messageResponseInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="id" type="xs:string"/>
+      <xs:element minOccurs="0" name="mobile" type="xs:string"/>
+      <xs:element minOccurs="0" name="status" type="xs:string"/>
+      <xs:element minOccurs="0" name="timeDelivered" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="timeSent" type="xs:dateTime"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="sendMessageContacts">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="subject" type="xs:string"/>
+      <xs:element minOccurs="0" name="message" type="xs:string"/>
+      <xs:element minOccurs="0" name="contactIds" type="xs:string"/>
+      <xs:element minOccurs="0" name="from" type="xs:string"/>
+      <xs:element minOccurs="0" name="username" type="xs:string"/>
+      <xs:element minOccurs="0" name="password" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="sendMessageContactsResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="countContacts">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="username" type="xs:string"/>
+      <xs:element minOccurs="0" name="password" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="countContactsResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="viewContact">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="contactId" type="xs:string"/>
+      <xs:element minOccurs="0" name="username" type="xs:string"/>
+      <xs:element minOccurs="0" name="password" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="viewContactResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:contactInfo"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="addContactsToGroups">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="contactIds" type="xs:string"/>
+      <xs:element minOccurs="0" name="groupIds" type="xs:string"/>
+      <xs:element minOccurs="0" name="username" type="xs:string"/>
+      <xs:element minOccurs="0" name="password" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="addContactsToGroupsResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="countGroupContacts">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="groupId" type="xs:string"/>
+      <xs:element minOccurs="0" name="username" type="xs:string"/>
+      <xs:element minOccurs="0" name="password" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="countGroupContactsResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="countGroups">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="username" type="xs:string"/>
+      <xs:element minOccurs="0" name="password" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="countGroupsResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="removeContacts">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="contactsIds" type="xs:string"/>
+      <xs:element minOccurs="0" name="username" type="xs:string"/>
+      <xs:element minOccurs="0" name="password" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="removeContactsResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="signup">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="fullname" type="xs:string"/>
+      <xs:element minOccurs="0" name="username" type="xs:string"/>
+      <xs:element minOccurs="0" name="password" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="signupResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="sendMessageVerbose">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="subject" type="xs:string"/>
+      <xs:element minOccurs="0" name="message" type="xs:string"/>
+      <xs:element minOccurs="0" name="groupIds" type="xs:string"/>
+      <xs:element minOccurs="0" name="contactIds" type="xs:string"/>
+      <xs:element minOccurs="0" name="mobileNumbers" type="xs:string"/>
+      <xs:element minOccurs="0" name="reference" type="xs:string"/>
+      <xs:element minOccurs="0" name="from" type="xs:string"/>
+      <xs:element minOccurs="0" name="username" type="xs:string"/>
+      <xs:element minOccurs="0" name="password" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="sendMessageVerboseResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="sendMessageGroups">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="subject" type="xs:string"/>
+      <xs:element minOccurs="0" name="message" type="xs:string"/>
+      <xs:element minOccurs="0" name="groupIds" type="xs:string"/>
+      <xs:element minOccurs="0" name="from" type="xs:string"/>
+      <xs:element minOccurs="0" name="username" type="xs:string"/>
+      <xs:element minOccurs="0" name="password" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="sendMessageGroupsResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="viewGroup">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="groupId" type="xs:string"/>
+      <xs:element minOccurs="0" name="username" type="xs:string"/>
+      <xs:element minOccurs="0" name="password" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="viewGroupResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:groupInfo"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="resetPassword">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="username" type="xs:string"/>
+      <xs:element minOccurs="0" name="oldPassword" type="xs:string"/>
+      <xs:element minOccurs="0" name="newPassword" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="resetPasswordResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="removeGroups">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="groupIds" type="xs:string"/>
+      <xs:element minOccurs="0" name="username" type="xs:string"/>
+      <xs:element minOccurs="0" name="password" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="removeGroupsResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="addGroup">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="name" type="xs:string"/>
+      <xs:element minOccurs="0" name="username" type="xs:string"/>
+      <xs:element minOccurs="0" name="password" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="addGroupResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:groupInfo"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="resendVerificationMail">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="username" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="resendVerificationMailResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getMessages">
+    <xs:sequence>
+      <xs:element name="start" type="xs:int"/>
+      <xs:element name="pageSize" type="xs:int"/>
+      <xs:element minOccurs="0" name="username" type="xs:string"/>
+      <xs:element minOccurs="0" name="password" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getMessagesResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:messageInfo"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="messageInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="batchId" type="xs:string"/>
+      <xs:element minOccurs="0" name="content" type="xs:string"/>
+      <xs:element minOccurs="0" name="from" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="recipients" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="reference" type="xs:string"/>
+      <xs:element minOccurs="0" name="status" type="xs:string"/>
+      <xs:element minOccurs="0" name="subject" type="xs:string"/>
+      <xs:element minOccurs="0" name="timeSent" type="xs:dateTime"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="sendMessage">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="subject" type="xs:string"/>
+      <xs:element minOccurs="0" name="message" type="xs:string"/>
+      <xs:element minOccurs="0" name="mobileNumbers" type="xs:string"/>
+      <xs:element minOccurs="0" name="from" type="xs:string"/>
+      <xs:element minOccurs="0" name="username" type="xs:string"/>
+      <xs:element minOccurs="0" name="password" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="sendMessageResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getSenderNames">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="username" type="xs:string"/>
+      <xs:element minOccurs="0" name="password" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getSenderNamesResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="editContact">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="contactId" type="xs:string"/>
+      <xs:element minOccurs="0" name="firstName" type="xs:string"/>
+      <xs:element minOccurs="0" name="lastName" type="xs:string"/>
+      <xs:element minOccurs="0" name="gender" type="xs:string"/>
+      <xs:element minOccurs="0" name="mobile" type="xs:string"/>
+      <xs:element minOccurs="0" name="email" type="xs:string"/>
+      <xs:element minOccurs="0" name="username" type="xs:string"/>
+      <xs:element minOccurs="0" name="password" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="editContactResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:contactInfo"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="checkBalance">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="username" type="xs:string"/>
+      <xs:element minOccurs="0" name="password" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="checkBalanceResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getMessageStatusesByReference">
+    <xs:sequence>
+      <xs:element name="start" type="xs:int"/>
+      <xs:element name="pageSize" type="xs:int"/>
+      <xs:element minOccurs="0" name="reference" type="xs:string"/>
+      <xs:element minOccurs="0" name="username" type="xs:string"/>
+      <xs:element minOccurs="0" name="password" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getMessageStatusesByReferenceResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:messageResponseInfo"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

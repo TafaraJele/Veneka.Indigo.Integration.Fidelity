@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://new.webservice.namespace" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns="http://www.fidelitybank.com" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://new.webservice.namespace" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation>
+    <wsdl:appinfo source="WMQI_APPINFO">
+      <MRWSDLAppInfo imported="true">
+        <generatedXSD location="Notifications_InlineSchema1.xsd" />
+        <binding hasEncoding="false" imported="true" name="Notification" originalBindingStyle="document" />
+      </MRWSDLAppInfo>
+    </wsdl:appinfo>
+  </wsdl:documentation>
+  <wsdl:types>
+    <xsd:schema xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" elementFormDefault="qualified" targetNamespace="http://new.webservice.namespace" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xsd:include schemaLocation="FBLNotification.xsd" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="SendSms_in">
+    <wsdl:part name="SendSms_Req" element="tns:SendSms_Req" />
+  </wsdl:message>
+  <wsdl:message name="SendSms_out">
+    <wsdl:part name="SendSms_Resp" element="tns:SendSms_Resp" />
+  </wsdl:message>
+  <wsdl:message name="SendEmail_in">
+    <wsdl:part name="SendEmail_Req" element="tns:SendEmail_Req" />
+  </wsdl:message>
+  <wsdl:message name="SendEmail_out">
+    <wsdl:part name="SendEmail_Resp" element="tns:SendEmail_Resp" />
+  </wsdl:message>
+  <wsdl:portType name="NotificationPortType">
+    <wsdl:operation name="SendSms">
+      <wsdl:input name="SendSms_input" message="tns:SendSms_in" />
+      <wsdl:output name="SendSms_output" message="tns:SendSms_out" />
+    </wsdl:operation>
+    <wsdl:operation name="SendEmail">
+      <wsdl:input name="SendEmail_input" message="tns:SendEmail_in" />
+      <wsdl:output name="SendEmail_output" message="tns:SendEmail_out" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="Notification" type="tns:NotificationPortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SendSms">
+      <soap:operation soapAction="SendSms" />
+      <wsdl:input name="SendSms_input">
+        <soap:body use="literal" parts="SendSms_Req" />
+      </wsdl:input>
+      <wsdl:output name="SendSms_output">
+        <soap:body use="literal" parts="SendSms_Resp" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendEmail">
+      <soap:operation soapAction="SendEmail" />
+      <wsdl:input name="SendEmail_input">
+        <soap:body use="literal" parts="SendEmail_Req" />
+      </wsdl:input>
+      <wsdl:output name="SendEmail_output">
+        <soap:body use="literal" parts="SendEmail_Resp" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="NotificationService">
+    <wsdl:port name="Notification" binding="tns:Notification">
+      <soap:address location="https://10.179.100.243:7061/FBLNotification" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

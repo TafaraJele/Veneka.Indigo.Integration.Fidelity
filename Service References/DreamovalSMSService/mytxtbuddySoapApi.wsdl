@@ -1,0 +1,577 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.fidelitybank.com/dreamoval/sendsms/" xmlns="http://schemas.xmlsoap.org/wsdl/" name="mytxtbuddySoapApi" targetNamespace="http://www.fidelitybank.com/dreamoval/sendsms/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <documentation>
+    <appinfo source="WMQI_APPINFO">
+      <MRWSDLAppInfo imported="true">
+        <generatedXSD location="SendSMS_Consumer_InlineSchema1.xsd" />
+        <binding hasEncoding="false" imported="true" name="mytxtbuddySoapApiPortBinding" originalBindingStyle="document" />
+      </MRWSDLAppInfo>
+    </appinfo>
+  </documentation>
+  <wsdl:types>
+    <xs:schema xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" targetNamespace="http://www.fidelitybank.com/dreamoval/sendsms/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:include schemaLocation="v1_2.xsd" />
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="sendMessageContacts">
+    <wsdl:part name="parameters" element="tns:sendMessageContacts" />
+  </wsdl:message>
+  <wsdl:message name="sendMessageContactsResponse">
+    <wsdl:part name="parameters" element="tns:sendMessageContactsResponse" />
+  </wsdl:message>
+  <wsdl:message name="sendMessageGroups">
+    <wsdl:part name="parameters" element="tns:sendMessageGroups" />
+  </wsdl:message>
+  <wsdl:message name="sendMessageGroupsResponse">
+    <wsdl:part name="parameters" element="tns:sendMessageGroupsResponse" />
+  </wsdl:message>
+  <wsdl:message name="countGroups">
+    <wsdl:part name="parameters" element="tns:countGroups" />
+  </wsdl:message>
+  <wsdl:message name="countGroupsResponse">
+    <wsdl:part name="parameters" element="tns:countGroupsResponse" />
+  </wsdl:message>
+  <wsdl:message name="removeContactsFromGroup">
+    <wsdl:part name="parameters" element="tns:removeContactsFromGroup" />
+  </wsdl:message>
+  <wsdl:message name="removeContactsFromGroupResponse">
+    <wsdl:part name="parameters" element="tns:removeContactsFromGroupResponse" />
+  </wsdl:message>
+  <wsdl:message name="getSenderNames">
+    <wsdl:part name="parameters" element="tns:getSenderNames" />
+  </wsdl:message>
+  <wsdl:message name="getSenderNamesResponse">
+    <wsdl:part name="parameters" element="tns:getSenderNamesResponse" />
+  </wsdl:message>
+  <wsdl:message name="getMessageStatusesByReference">
+    <wsdl:part name="parameters" element="tns:getMessageStatusesByReference" />
+  </wsdl:message>
+  <wsdl:message name="getMessageStatusesByReferenceResponse">
+    <wsdl:part name="parameters" element="tns:getMessageStatusesByReferenceResponse" />
+  </wsdl:message>
+  <wsdl:message name="getMessageStatusesByBatch">
+    <wsdl:part name="parameters" element="tns:getMessageStatusesByBatch" />
+  </wsdl:message>
+  <wsdl:message name="getMessageStatusesByBatchResponse">
+    <wsdl:part name="parameters" element="tns:getMessageStatusesByBatchResponse" />
+  </wsdl:message>
+  <wsdl:message name="sendMessageVerbose">
+    <wsdl:part name="parameters" element="tns:sendMessageVerbose" />
+  </wsdl:message>
+  <wsdl:message name="sendMessageVerboseResponse">
+    <wsdl:part name="parameters" element="tns:sendMessageVerboseResponse" />
+  </wsdl:message>
+  <wsdl:message name="getMessages">
+    <wsdl:part name="parameters" element="tns:getMessages" />
+  </wsdl:message>
+  <wsdl:message name="getMessagesResponse">
+    <wsdl:part name="parameters" element="tns:getMessagesResponse" />
+  </wsdl:message>
+  <wsdl:message name="countMessages">
+    <wsdl:part name="parameters" element="tns:countMessages" />
+  </wsdl:message>
+  <wsdl:message name="countMessagesResponse">
+    <wsdl:part name="parameters" element="tns:countMessagesResponse" />
+  </wsdl:message>
+  <wsdl:message name="viewGroup">
+    <wsdl:part name="parameters" element="tns:viewGroup" />
+  </wsdl:message>
+  <wsdl:message name="viewGroupResponse">
+    <wsdl:part name="parameters" element="tns:viewGroupResponse" />
+  </wsdl:message>
+  <wsdl:message name="editGroup">
+    <wsdl:part name="parameters" element="tns:editGroup" />
+  </wsdl:message>
+  <wsdl:message name="editGroupResponse">
+    <wsdl:part name="parameters" element="tns:editGroupResponse" />
+  </wsdl:message>
+  <wsdl:message name="addContactsToGroups">
+    <wsdl:part name="parameters" element="tns:addContactsToGroups" />
+  </wsdl:message>
+  <wsdl:message name="addContactsToGroupsResponse">
+    <wsdl:part name="parameters" element="tns:addContactsToGroupsResponse" />
+  </wsdl:message>
+  <wsdl:message name="removeContacts">
+    <wsdl:part name="parameters" element="tns:removeContacts" />
+  </wsdl:message>
+  <wsdl:message name="removeContactsResponse">
+    <wsdl:part name="parameters" element="tns:removeContactsResponse" />
+  </wsdl:message>
+  <wsdl:message name="sendMessage">
+    <wsdl:part name="parameters" element="tns:sendMessage" />
+  </wsdl:message>
+  <wsdl:message name="sendMessageResponse">
+    <wsdl:part name="parameters" element="tns:sendMessageResponse" />
+  </wsdl:message>
+  <wsdl:message name="resendVerificationMail">
+    <wsdl:part name="parameters" element="tns:resendVerificationMail" />
+  </wsdl:message>
+  <wsdl:message name="resendVerificationMailResponse">
+    <wsdl:part name="parameters" element="tns:resendVerificationMailResponse" />
+  </wsdl:message>
+  <wsdl:message name="resetPassword">
+    <wsdl:part name="parameters" element="tns:resetPassword" />
+  </wsdl:message>
+  <wsdl:message name="resetPasswordResponse">
+    <wsdl:part name="parameters" element="tns:resetPasswordResponse" />
+  </wsdl:message>
+  <wsdl:message name="checkBalance">
+    <wsdl:part name="parameters" element="tns:checkBalance" />
+  </wsdl:message>
+  <wsdl:message name="checkBalanceResponse">
+    <wsdl:part name="parameters" element="tns:checkBalanceResponse" />
+  </wsdl:message>
+  <wsdl:message name="getContacts">
+    <wsdl:part name="parameters" element="tns:getContacts" />
+  </wsdl:message>
+  <wsdl:message name="getContactsResponse">
+    <wsdl:part name="parameters" element="tns:getContactsResponse" />
+  </wsdl:message>
+  <wsdl:message name="countContacts">
+    <wsdl:part name="parameters" element="tns:countContacts" />
+  </wsdl:message>
+  <wsdl:message name="countContactsResponse">
+    <wsdl:part name="parameters" element="tns:countContactsResponse" />
+  </wsdl:message>
+  <wsdl:message name="getGroupContacts">
+    <wsdl:part name="parameters" element="tns:getGroupContacts" />
+  </wsdl:message>
+  <wsdl:message name="getGroupContactsResponse">
+    <wsdl:part name="parameters" element="tns:getGroupContactsResponse" />
+  </wsdl:message>
+  <wsdl:message name="countGroupContacts">
+    <wsdl:part name="parameters" element="tns:countGroupContacts" />
+  </wsdl:message>
+  <wsdl:message name="countGroupContactsResponse">
+    <wsdl:part name="parameters" element="tns:countGroupContactsResponse" />
+  </wsdl:message>
+  <wsdl:message name="viewContact">
+    <wsdl:part name="parameters" element="tns:viewContact" />
+  </wsdl:message>
+  <wsdl:message name="viewContactResponse">
+    <wsdl:part name="parameters" element="tns:viewContactResponse" />
+  </wsdl:message>
+  <wsdl:message name="addContact">
+    <wsdl:part name="parameters" element="tns:addContact" />
+  </wsdl:message>
+  <wsdl:message name="addContactResponse">
+    <wsdl:part name="parameters" element="tns:addContactResponse" />
+  </wsdl:message>
+  <wsdl:message name="editContact">
+    <wsdl:part name="parameters" element="tns:editContact" />
+  </wsdl:message>
+  <wsdl:message name="editContactResponse">
+    <wsdl:part name="parameters" element="tns:editContactResponse" />
+  </wsdl:message>
+  <wsdl:message name="signup">
+    <wsdl:part name="parameters" element="tns:signup" />
+  </wsdl:message>
+  <wsdl:message name="signupResponse">
+    <wsdl:part name="parameters" element="tns:signupResponse" />
+  </wsdl:message>
+  <wsdl:message name="getGroups">
+    <wsdl:part name="parameters" element="tns:getGroups" />
+  </wsdl:message>
+  <wsdl:message name="getGroupsResponse">
+    <wsdl:part name="parameters" element="tns:getGroupsResponse" />
+  </wsdl:message>
+  <wsdl:message name="addGroup">
+    <wsdl:part name="parameters" element="tns:addGroup" />
+  </wsdl:message>
+  <wsdl:message name="addGroupResponse">
+    <wsdl:part name="parameters" element="tns:addGroupResponse" />
+  </wsdl:message>
+  <wsdl:message name="removeGroups">
+    <wsdl:part name="parameters" element="tns:removeGroups" />
+  </wsdl:message>
+  <wsdl:message name="removeGroupsResponse">
+    <wsdl:part name="parameters" element="tns:removeGroupsResponse" />
+  </wsdl:message>
+  <wsdl:portType name="mytxtbuddySoapApi">
+    <wsdl:operation name="sendMessageContacts">
+      <wsdl:input message="tns:sendMessageContacts" />
+      <wsdl:output message="tns:sendMessageContactsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="sendMessageGroups">
+      <wsdl:input message="tns:sendMessageGroups" />
+      <wsdl:output message="tns:sendMessageGroupsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="countGroups">
+      <wsdl:input message="tns:countGroups" />
+      <wsdl:output message="tns:countGroupsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="removeContactsFromGroup">
+      <wsdl:input message="tns:removeContactsFromGroup" />
+      <wsdl:output message="tns:removeContactsFromGroupResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getSenderNames">
+      <wsdl:input message="tns:getSenderNames" />
+      <wsdl:output message="tns:getSenderNamesResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getMessageStatusesByReference">
+      <wsdl:input message="tns:getMessageStatusesByReference" />
+      <wsdl:output message="tns:getMessageStatusesByReferenceResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getMessageStatusesByBatch">
+      <wsdl:input message="tns:getMessageStatusesByBatch" />
+      <wsdl:output message="tns:getMessageStatusesByBatchResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="sendMessageVerbose">
+      <wsdl:input message="tns:sendMessageVerbose" />
+      <wsdl:output message="tns:sendMessageVerboseResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getMessages">
+      <wsdl:input message="tns:getMessages" />
+      <wsdl:output message="tns:getMessagesResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="countMessages">
+      <wsdl:input message="tns:countMessages" />
+      <wsdl:output message="tns:countMessagesResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="viewGroup">
+      <wsdl:input message="tns:viewGroup" />
+      <wsdl:output message="tns:viewGroupResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="editGroup">
+      <wsdl:input message="tns:editGroup" />
+      <wsdl:output message="tns:editGroupResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="addContactsToGroups">
+      <wsdl:input message="tns:addContactsToGroups" />
+      <wsdl:output message="tns:addContactsToGroupsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="removeContacts">
+      <wsdl:input message="tns:removeContacts" />
+      <wsdl:output message="tns:removeContactsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="sendMessage">
+      <wsdl:input message="tns:sendMessage" />
+      <wsdl:output message="tns:sendMessageResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="resendVerificationMail">
+      <wsdl:input message="tns:resendVerificationMail" />
+      <wsdl:output message="tns:resendVerificationMailResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="resetPassword">
+      <wsdl:input message="tns:resetPassword" />
+      <wsdl:output message="tns:resetPasswordResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="checkBalance">
+      <wsdl:input message="tns:checkBalance" />
+      <wsdl:output message="tns:checkBalanceResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getContacts">
+      <wsdl:input message="tns:getContacts" />
+      <wsdl:output message="tns:getContactsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="countContacts">
+      <wsdl:input message="tns:countContacts" />
+      <wsdl:output message="tns:countContactsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getGroupContacts">
+      <wsdl:input message="tns:getGroupContacts" />
+      <wsdl:output message="tns:getGroupContactsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="countGroupContacts">
+      <wsdl:input message="tns:countGroupContacts" />
+      <wsdl:output message="tns:countGroupContactsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="viewContact">
+      <wsdl:input message="tns:viewContact" />
+      <wsdl:output message="tns:viewContactResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="addContact">
+      <wsdl:input message="tns:addContact" />
+      <wsdl:output message="tns:addContactResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="editContact">
+      <wsdl:input message="tns:editContact" />
+      <wsdl:output message="tns:editContactResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="signup">
+      <wsdl:input message="tns:signup" />
+      <wsdl:output message="tns:signupResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getGroups">
+      <wsdl:input message="tns:getGroups" />
+      <wsdl:output message="tns:getGroupsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="addGroup">
+      <wsdl:input message="tns:addGroup" />
+      <wsdl:output message="tns:addGroupResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="removeGroups">
+      <wsdl:input message="tns:removeGroups" />
+      <wsdl:output message="tns:removeGroupsResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="mytxtbuddySoapApiPortBinding" type="tns:mytxtbuddySoapApi">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="sendMessageContacts">
+      <soap:operation soapAction="" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendMessageGroups">
+      <soap:operation soapAction="" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="countGroups">
+      <soap:operation soapAction="" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="removeContactsFromGroup">
+      <soap:operation soapAction="" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getSenderNames">
+      <soap:operation soapAction="" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getMessageStatusesByReference">
+      <soap:operation soapAction="" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getMessageStatusesByBatch">
+      <soap:operation soapAction="" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendMessageVerbose">
+      <soap:operation soapAction="" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getMessages">
+      <soap:operation soapAction="" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="countMessages">
+      <soap:operation soapAction="" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="viewGroup">
+      <soap:operation soapAction="" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="editGroup">
+      <soap:operation soapAction="" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addContactsToGroups">
+      <soap:operation soapAction="" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="removeContacts">
+      <soap:operation soapAction="" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendMessage">
+      <soap:operation soapAction="" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="resendVerificationMail">
+      <soap:operation soapAction="" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="resetPassword">
+      <soap:operation soapAction="" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="checkBalance">
+      <soap:operation soapAction="" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getContacts">
+      <soap:operation soapAction="" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="countContacts">
+      <soap:operation soapAction="" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getGroupContacts">
+      <soap:operation soapAction="" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="countGroupContacts">
+      <soap:operation soapAction="" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="viewContact">
+      <soap:operation soapAction="" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addContact">
+      <soap:operation soapAction="" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="editContact">
+      <soap:operation soapAction="" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="signup">
+      <soap:operation soapAction="" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getGroups">
+      <soap:operation soapAction="" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addGroup">
+      <soap:operation soapAction="" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="removeGroups">
+      <soap:operation soapAction="" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="mytxtbuddySoapApi">
+    <wsdl:port name="mytxtbuddySoapApiPort" binding="tns:mytxtbuddySoapApiPortBinding">
+      <soap:address location="https://10.179.100.243:7065/api/soap/v1_2" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
