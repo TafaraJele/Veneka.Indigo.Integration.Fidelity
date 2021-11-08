@@ -324,18 +324,18 @@ namespace Veneka.Indigo.Integration.Fidelity
                 CIFService amlock = new CIFService();
 
                 ////the test key
-                string apiKeyValue = "RE38@$HSL%*PP6";
-                string apiKeyName = "Api-Key";
-
-                ////the prod key
-                //string apiKeyValue = "OOUY@2912*00EA";
+                //string apiKeyValue = "RE38@$HSL%*PP6";
                 //string apiKeyName = "Api-Key";
 
+                ////the prod key
+                string apiKeyValue = "OOUY@2912*00EA";
+                string apiKeyName = "Api-Key";
+
                 //test url
-                string baseUrl = @"https://dpfbgltest01.fidelitybank.com.gh:1504";
+                //string baseUrl = @"https://dpfbgltest01.fidelitybank.com.gh:1504";
 
                 //prod url
-                //string baseUrl = @"https://intranet";
+                string baseUrl = @"https://intranet";
                 //string baseUrl = @"https://gvivegh.com:1355";
 
 
@@ -429,7 +429,7 @@ namespace Veneka.Indigo.Integration.Fidelity
 
                                 if (resp.responseCode == "01")
                                 {
-                                    responseMessage = $"Customer {accountDetails.LastName} {accountDetails.FirstName} is black listed."; //$"Invalid Message for request {resp.prospectId}. Response error {resp.message}";
+                                    responseMessage = $"Customer {accountDetails.LastName} {accountDetails.FirstName} {accountDetails.MiddleName} is black listed."; //$"Invalid Message for request {resp.prospectId}. Response error {resp.message}";
                                     return false;
                                 }
                                 else if (resp.responseCode == "00")
@@ -501,8 +501,8 @@ namespace Veneka.Indigo.Integration.Fidelity
             //DecodeName(flexAccountDetails.CUSTNAME, out firstName, out middlename, out lastname);
             if (!string.IsNullOrEmpty(custDetails.Fullname))
             {
-                firstName = custDetails.Fullname.Split(' ')[0];
-                lastname = custDetails.Fullname.Split(' ')[1];
+                firstName = custDetails.Fullname.Split(' ')[1];
+                lastname = custDetails.Fullname.Split(' ')[0];
                 
                 //get customer other names
                 var customerNames = custDetails.Fullname.Split(' ');
