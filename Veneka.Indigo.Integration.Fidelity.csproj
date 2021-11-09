@@ -125,6 +125,7 @@
     <Compile Include="FidelityNS.cs" />
     <Compile Include="FidelityCPS.cs" />
     <Compile Include="FidelityHSM.cs" />
+    <Compile Include="FidelityThreedSecure.cs" />
     <Compile Include="Flexcube\FlexcubeWebService.cs" />
     <Compile Include="Flexcube\MasterCardFlexcubeWebService.cs" />
     <Compile Include="Flexcube\MelcomFlexcubeWebService.cs" />
