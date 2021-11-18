@@ -36,14 +36,14 @@ namespace Veneka.Indigo.Integration.Fidelity
                 //new XElement("PAN", item.CardNumber),
                 //new XElement("CANCELDATE", item.CardExpiryDate.Value.ToString("dd/MM/yyyy")),
                 //new XElement("MBR", "0"),
-                new XElement("PAN", item.CardNumber),
+                new XElement("ACCOUNT", item.CustomerAccountNumber),
                 new XElement("CELLPHONE", item.ContactNumber.StartsWith("+") ? item.ContactNumber.Substring(1) : item.ContactNumber),
                 new XElement("EMAIL", item.ContactEmail))));
 
 
                 string prefix_bin = threeDSecureDetails[0].CardNumber.Substring(0, 6);
                 string prefix_bank_id = "FBPG";
-                string partFileName = "Update Mobile & Email By PAN";
+                string partFileName = "Update Mobile & Email By AccountNo";
 
                 if (config is FileSystemConfig)
                 {

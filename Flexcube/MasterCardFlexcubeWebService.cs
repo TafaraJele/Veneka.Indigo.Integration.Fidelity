@@ -445,6 +445,7 @@ namespace Veneka.Indigo.Integration.Fidelity.Flexcube
             else
             {
                 _cbsLog.Debug("Non-Fidelity customer ");
+
             }
 
             #endregion
@@ -529,7 +530,7 @@ namespace Veneka.Indigo.Integration.Fidelity.Flexcube
                     denominations += string.Format("{0}:{1}:{2}:{3}|",denom.DenomCode,denom.DenomCCY,denom.DenomValue,denom.DenomUnits);
                 }
                 _cbsLog.Debug(string.Format("denominations to load {0}", denominations));
-                if (!_flexMelcomRtService.CreateDebitTransactionFS(transactionCode,tellerId, denominations, customerDetails.NameOnCard, customerDetails.CardNumber, customerDetails.CardReference, accountToDebit, branchOfAccToDebit, branchOfAccToDebit, indigoReference, strNarration, ccy, customerDetails.FeeCharge.Value, MessageId, out flexcubeReference, out messages))
+                if (!_flexMelcomRtService.CreateDebitTransactionFS(transactionCode,tellerId, customerDetails.AccountNumber, denominations, customerDetails.NameOnCard, customerDetails.CardNumber, customerDetails.CardReference, accountToDebit, branchOfAccToDebit, branchOfAccToDebit, indigoReference, strNarration, ccy, customerDetails.FeeCharge.Value, MessageId, out flexcubeReference, out messages))
                 {
                     responseMessage = BuildHtmlMessage(messages);
                     return false;
