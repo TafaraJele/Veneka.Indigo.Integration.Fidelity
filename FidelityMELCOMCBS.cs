@@ -133,7 +133,8 @@ namespace Veneka.Indigo.Integration.Fidelity
                             string accountToDebit = customerDetails.IsCBSAccountHolder ? customerDetails.AdditionalAccountNumber : eCashAccount;
                             _cbsLog.Debug($"At branch {strBranchCode} account to debit is {accountToDebit}");
                             string username = DataSource.LookupDAL.LookupUserNameById(auditUserId);
-                            _cbsLog.Debug(string.Format("UserID {0},Teller ID  - {1}", auditUserId, username));
+                            _cbsLog.Debug(string.Format("UserID {0},Teller ID  - {1}", auditUserId, username)); 
+
                             if (service.ChargeFee(customerDetails, username, accountToDebit, cardIssuingAccountMelcom, languageId, true, out responseMessage))
                             {
                                 if (customerDetails.CardId > 0)
@@ -146,10 +147,21 @@ namespace Veneka.Indigo.Integration.Fidelity
                         }
                         else
                         {
-                            //is this fidelity branch
+                            //this is fidelity branch
+                            if (!customerDetails.IsCBSAccountHolder && customerDetails.FundingDetails == null)
+                            {
+                                _cbsLog.Debug("Doing issuance for a non Fidelity customer at Fidelty branch. Stop charging mark card charge fee status as pending");
+
+                                //mark card charge fee as PENDING charging for charging at the teller
+                                int cardChargeFeeStatus = 0;
+                                DataSource.CardsDAL.UpdateCardChargeFeeStatus(customerDetails.CardId, cardChargeFeeStatus, auditUserId, auditWorkstation);
+                                return true;
+                            }
+
                             string tellerId = DataSource.LookupDAL.LookupBranchTellerIDByUserId(auditUserId);
                             _cbsLog.Debug(string.Format("UserID {0},Teller ID  - {1}", auditUserId, tellerId));
                             _cbsLog.Debug(string.Format("Fidelity branch ({0}), call appropriate charge fee service", strBranchCode));
+
                             if (service.ChargeFeeAtFidelityBank(customerDetails, tellerId, tellerAccount, cardIssuingAccountFidelity, branchFundsLoadAccount, languageId, true, out responseMessage))
                             {
                                 if (customerDetails.CardId > 0)

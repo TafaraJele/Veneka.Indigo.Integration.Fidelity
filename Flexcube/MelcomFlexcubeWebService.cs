@@ -478,7 +478,7 @@ namespace Veneka.Indigo.Integration.Fidelity.Flexcube
             }
             else
             {
-                _cbsLog.Debug("Non-Fidelity customer ");
+                _cbsLog.Debug("  ");
             }
 
             #endregion

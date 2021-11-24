@@ -132,9 +132,9 @@ namespace Veneka.Indigo.Integration.Fidelity
                             _cbsLog.Debug(string.Format("Fidelity branch ({0}), call appropriate charge fee service", strBranchCode));
                             _cbsLog.Debug(string.Format("UserID {0},Teller ID  - {1}", auditUserId, tellerId));
 
-                            if (!customerDetails.IsCBSAccountHolder)
+                            if (!customerDetails.IsCBSAccountHolder && customerDetails.FundingDetails == null) 
                             {
-                                _cbsLog.Debug("Doing issuance for a non Fidelity at Fidelty branch. Stop charging mark card charge fee status as pending");
+                                _cbsLog.Debug("Doing issuance for a non Fidelity customer at Fidelty branch. Stop charging mark card charge fee status as pending");
 
                                 //mark card charge fee as PENDING charging for charging at the teller
                                 int cardChargeFeeStatus = 0;
