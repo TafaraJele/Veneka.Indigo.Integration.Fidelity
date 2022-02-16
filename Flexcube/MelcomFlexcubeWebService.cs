@@ -422,25 +422,32 @@ namespace Veneka.Indigo.Integration.Fidelity.Flexcube
 
         public bool ChargeFeeAtFidelityBank(CustomerDetails customerDetails,string tellerId, string tellerAccount, string headOfficeFundsLoadAccount, string branchFundsLoadAccount, int languageId, bool IsIssuance, out string responseMessage)
         {
+            _cbsLog.Debug("In MelcomFlexcubeWebService ChargeFeeAtFidelityBank method");
             string strNarration = string.Empty;
             if (IsIssuance)
             {
+                _cbsLog.Debug("assigning Issuance narration");
                 strNarration = "VISA ISSUANCE FEE B/O";
             }
             else
             {
+                _cbsLog.Debug("assigning funding naration");
                 strNarration = "VISA PREPAID CARD LOAD B/O";
             }
             _flexMelcomRtService.LanguageId = languageId;
             List<Tuple<string, string>> messages;
-
+            _cbsLog.Debug($"branch look up DomicileBranchId {customerDetails.DomicileBranchId}, {customerDetails.BranchId}");
             // LookupDAL lDal = new LookupDAL(_connectionString);
             string branchCode = DataSource.LookupDAL.LookupBranchCode(customerDetails.DomicileBranchId);
             string chargeBranchCode = branchCode;
+            _cbsLog.Debug("charge branch code look up");
             if (customerDetails.ChargeFeeToIssuingBranch)
                 chargeBranchCode = DataSource.LookupDAL.LookupBranchCode(customerDetails.BranchId);
 
+            _cbsLog.Debug($"charge branch code look up {chargeBranchCode}");
+
             string ccy = encodeCurrency(customerDetails.CurrencyId.Value);
+            _cbsLog.Debug($"charge branch code look up {ccy}");
 
             Veneka.Module.OracleFlexcube.UBSAccWebService.AccBalRestypeACC_BAL accBalance;
             _cbsLog.Debug("Calling Charge fee method in FlexcubeWebService class");
@@ -478,7 +485,7 @@ namespace Veneka.Indigo.Integration.Fidelity.Flexcube
             }
             else
             {
-                _cbsLog.Debug("  ");
+                _cbsLog.Debug("Is not CBS account holder");
             }
 
             #endregion

@@ -161,7 +161,9 @@ namespace Veneka.Indigo.Integration.Fidelity
                             string tellerId = DataSource.LookupDAL.LookupBranchTellerIDByUserId(auditUserId);
                             _cbsLog.Debug(string.Format("UserID {0},Teller ID  - {1}", auditUserId, tellerId));
                             _cbsLog.Debug(string.Format("Fidelity branch ({0}), call appropriate charge fee service", strBranchCode));
+                            var data = JsonConvert.SerializeObject(customerDetails);
 
+                            _cbsLog.Debug($"customerDetails{data} tellerId{tellerId} tellerAccount{tellerAccount} cardIssuingAccountFidelity{cardIssuingAccountFidelity} branchFundsLoadAccount{branchFundsLoadAccount} languageId{languageId}");
                             if (service.ChargeFeeAtFidelityBank(customerDetails, tellerId, tellerAccount, cardIssuingAccountFidelity, branchFundsLoadAccount, languageId, true, out responseMessage))
                             {
                                 if (customerDetails.CardId > 0)
