@@ -283,50 +283,20 @@ namespace Veneka.Indigo.Integration.Fidelity
 
         public bool GetAccountDetail(string accountNumber, List<IProductPrintField> printFields, int cardIssueReasonId, int issuerId, int branchId, int productId, ExternalSystemFields externalFields, IConfig config, int languageId, long auditUserId, string auditWorkstation, out AccountDetails accountDetails, out string responseMessage)
         {
-            ////below for workdaround
+            string ghanaCardCode = string.Empty;
+            string redirectUrl = string.Empty;
+
+            var accountIndex = accountNumber.IndexOf(';');
+            if (accountIndex != -1)
+            {
+                var stringArray = accountNumber.Split(';');
+                accountNumber = stringArray[0];
+                redirectUrl = stringArray[1];
+                ghanaCardCode = stringArray[2];
+
+                _cbsLog.Trace($"ghanaCardCode {ghanaCardCode} redirectUrl {redirectUrl} account Number {accountNumber}");
+            }
             responseMessage = string.Empty;
-
-            ////Check in flexcube customer exist or not. If exit continue with prepaid process
-            //_cbsLog.Trace(t => t("Doing GetAccountDetails"));
-
-            //AccountDetails PrepaidAccountDetails = new AccountDetails();
-            //string branchCode = DataSource.LookupDAL.LookupBranchCode(branchId);
-            //accountDetails = null;
-            //accountDetails = BuildAccountDetails(Convert.ToInt32(accountNumber));
-
-            //_cbsLog.Debug("Done BuildAccount");
-
-            //accountDetails.ProductFields = new List<ProductField>();
-            //_cbsLog.Debug("Calling productFields ");
-            //foreach (var printField in printFields)
-            //{
-            //    if (printField is PrintStringField)
-            //    {
-            //        switch (printField.MappedName.ToLower())
-            //        {
-            //            case "ind_sys_dob":
-            //                ((PrintStringField)printField).Value = "15/06/2002";
-            //                accountDetails.ProductFields.Add(new ProductField(printField));
-            //                //_cbsLog.Debug("Date of birth" + dob);
-            //                break;
-            //            case "ind_sys_address":
-            //                ((PrintStringField)printField).Value = "";
-            //                accountDetails.ProductFields.Add(new ProductField(printField));
-            //                //_cbsLog.Debug("address" + response.adesc);
-            //                break;
-            //            default: accountDetails.ProductFields.Add(new ProductField(printField)); break;
-            //        }
-
-            //        //accountDetails.ProductFields.Add(new ProductField(item));
-
-            //    }
-            //}
-
-            //responseMessage = "success";
-            //return true;
-
-
-            //below correct method for melcom//
 
             if (!(config is Config.WebServiceConfig))
                 throw new ArgumentException("CBS config parameters must be for Webservice.");
@@ -342,7 +312,7 @@ namespace Veneka.Indigo.Integration.Fidelity
             {
                 MelcomFlexcubeWebService service = new MelcomFlexcubeWebService((WebServiceConfig)config, DataSource);
                 GviveServices gviveService = new GviveServices();
-                CIFService amlock = new CIFService();
+                CIFService cifservice = new CIFService();
 
                 //the test key
                 //string apiKeyValue = "RE38@$HSL%*PP6";
@@ -374,93 +344,71 @@ namespace Veneka.Indigo.Integration.Fidelity
                 _cbsLog.Debug("query customer account/id :" + accountNumber);
                 if (!service.QueryCustAcc(accountNumber, printFields, branchCode, languageId, accNumPrefix, out accountDetails, out responseMessage))
                 {
-                    //lets check in Gvive
-                    if (accountDetails == null)
+                    //lets check in Ghana card
+                    if (accountDetails == null && !string.IsNullOrEmpty(ghanaCardCode) && !string.IsNullOrEmpty(redirectUrl))
                     {
-                        _cbsLog.Debug("account detail not found in cbs");
-                        var customer = gviveService.GetCustomerDetails(accountNumber, baseUrl, apiKeyValue, apiKeyName).Result;
-                        if (!customer.IsSuccess)
+                        _cbsLog.Debug($"account detail not found in cbs get token for ghana card search ghanaCardCode{ghanaCardCode} redirectUrl {redirectUrl}");
+
+                        var ghanaCardToken = cifservice.GetGhanaCardAuthToken(ghanaCardCode, @"http://localhost:453/fileprocessing/api/customers", redirectUrl).Result;
+
+                        if (ghanaCardToken.ResponseType == GhanaCard.Module.Enums.ResponseType.SUCCESSFUL)
                         {
-                            _cbsLog.Debug("customer not found in gvive");
-                            responseMessage = "customer not found in gvive";
-                            return false;
-                        }
-                        else
-                        {
-                            _cbsLog.Debug("found person in gvive, lets return the details");
-                            //extract information
-                            accountDetails = BuildAccountDetails(customer, printFields, accountNumber, accNumPrefix);
-
-                            #region CIF - Amlock Validation
-                            string indigoReference = String.Format("Am{0}{1}", DateTime.Now.ToString("yy"),
-                                                                    DateTime.Now.DayOfYear);
-                            indigoReference += DataSource.TransactionSequenceDAL.NextSequenceNumber("amlocktxn", ResetPeriod.DAILY)
-                                            .ToString().PadLeft((16 - indigoReference.Length), '0');
-
-                            Veneka.Module.CIFIntegration.Models.Prospect prospect = new Module.CIFIntegration.Models.Prospect()
+                            var personDetails = cifservice.GhanaCardGetPersonInfo(ghanaCardToken.Value, @"http://localhost:453/fileprocessing/api/customers").Result;
+                            if (personDetails.ResponseType == GhanaCard.Module.Enums.ResponseType.UNSUCCESSFUL)
                             {
-                                dateOfBirth = customer.DateOfBirth,
-                                nationalId = accountNumber,
-                                otherNames = accountDetails.FirstName + " " + accountDetails.MiddleName,
-                                surname = accountDetails.LastName,
-                                id = indigoReference,
-                                nationality = customer.Nationality,
-                                pep = "N"
-                            };
-                            
-                            //var resp = amlock.AmlockValidation(@"http://10.179.143.120:453/fileprocessing/api/customers/amlock-validation", prospect).Result;
-                            var resp = amlock.AmlockValidation(@"http://localhost:453/fileprocessing/api/customers/amlock-validation", prospect).Result;
-
-                            var data = JsonConvert.SerializeObject(resp);
-                            _cbsLog.Info($"Amlock response {data}");
-
-                            if (resp.statusCode != Module.CIFIntegration.Enums.StatusCode.Ok)
-                            {
-                                _cbsLog.Info($"show error response ");
-                                if (resp.errorMessages.Count > 0)
-                                {
-                                    StringBuilder message = new StringBuilder();
-                                    foreach (var errorMessage in resp.errorMessages)
-                                    {
-                                        message.Append(errorMessage.message);
-                                    }
-                                    if (message.ToString() == "Amlock error, check logs for exception details")
-                                    {
-                                        responseMessage = $"{message}";
-                                        return false;
-                                    }
-                                    else
-                                    {
-                                        responseMessage = $"Error! {message}, {customer.SearchType.ToString()} not supported use another ID type ";
-                                        return false;
-                                    }
-
-                                }
-                                if (!string.IsNullOrEmpty(resp.exceptionMessage))
-                                {
-                                    responseMessage = $"{resp.exceptionMessage}";
-                                    return false;
-                                }
-
-                                responseMessage = "Error!!!";
+                                _cbsLog.Debug("customer not found in Ghana card");
+                                responseMessage = "customer not found in ghana card";
                                 return false;
                             }
                             else
                             {
-                                _cbsLog.Info($"show success response ");
+                                _cbsLog.Debug("found person in ghana card, lets return the details");
+                                //extract information
+                                accountDetails = BuildAccountDetails(personDetails.Value, printFields, accountNumber, accNumPrefix);
 
-                                if (resp.responseCode == "01")
+                                #region CIF - Amlock Validation
+                                string indigoReference = String.Format("Am{0}{1}", DateTime.Now.ToString("yy"),
+                                                                        DateTime.Now.DayOfYear);
+                                indigoReference += DataSource.TransactionSequenceDAL.NextSequenceNumber("amlocktxn", ResetPeriod.DAILY)
+                                                .ToString().PadLeft((16 - indigoReference.Length), '0');
+                                var customer = personDetails.Value.Data;
+                                Veneka.Module.CIFIntegration.Models.Prospect prospect = new Module.CIFIntegration.Models.Prospect()
                                 {
-                                    responseMessage = $"Customer {accountDetails.LastName} {accountDetails.FirstName} {accountDetails.MiddleName}is black listed."; //$"Invalid Message for request {resp.prospectId}. Response error {resp.message}";
+                                    dateOfBirth = customer.BirthDate,
+                                    nationalId = customer.NationalId,
+                                    otherNames = customer.Forenames,
+                                    surname = customer.Surname,
+                                    id = indigoReference,
+                                    nationality = customer.Nationality,
+                                    pep = "N"
+                                };
+
+                                //var resp = amlock.AmlockValidation(@"http://10.179.143.120:453/fileprocessing/api/customers/amlock-validation", prospect).Result;
+                                var resp = cifservice.AmlockValidation(@"http://localhost:453/fileprocessing/api/customers/amlock-validation", prospect).Result;
+
+                                if (resp.statusCode != Module.CIFIntegration.Enums.StatusCode.Ok)
+                                {
+                                    responseMessage = $"Invalid Message. Response error {resp.message}";
                                     return false;
                                 }
-                                else if (resp.responseCode == "00")
+                                else
                                 {
-                                    return true;
+                                    if (resp.responseCode == "01")
+                                    {
+                                        responseMessage = $"Customer {accountDetails.LastName} {accountDetails.FirstName} is black listed."; //$"Invalid Message for request {resp.prospectId}. Response error {resp.message}";
+                                        return false;
+                                    }
+                                    else if (resp.responseCode == "00")
+                                    {
+                                        return true;
+                                    }
                                 }
+                                #endregion
                             }
-                            #endregion
                         }
+
+                        //var customer = gviveService.GetCustomerDetails(accountNumber, baseUrl, apiKeyValue, apiKeyName).Result;
+
                     }
                     else
                     {
@@ -516,46 +464,51 @@ namespace Veneka.Indigo.Integration.Fidelity
             }
             return accountType;
         }
-            private AccountDetails BuildAccountDetails(Veneka.Module.GviveAPI.Models.CustomerDetails custDetails, List<ProductPrinting.IProductPrintField> printFields, string searchValue,string accNumPrefix)
+        
+        private AccountDetails BuildAccountDetails(Persondata personData, List<ProductPrinting.IProductPrintField> printFields, string searchValue, string accNumPrefix)
         {
             string firstName = string.Empty, middlename = string.Empty, lastname = string.Empty;
 
-            //DecodeName(flexAccountDetails.CUSTNAME, out firstName, out middlename, out lastname);
-            if (!string.IsNullOrEmpty(custDetails.Fullname))
-            {
-                firstName = custDetails.Fullname.Split(' ')[1];
-                lastname = custDetails.Fullname.Split(' ')[0];
+            var custDetails = personData.Data;
 
-                //get customer other names
-                var customerNames = custDetails.Fullname.Split(' ');
-                StringBuilder builder = new StringBuilder();
-                if (customerNames.Length > 1)
+            var namesArray = new string[2];
+            //DecodeName(flexAccountDetails.CUSTNAME, out firstName, out middlename, out lastname);
+
+            var firstnameIndex = custDetails.Forenames.IndexOf(' ');
+            if (firstnameIndex != -1)
+            {
+                namesArray = GetNames(custDetails.Forenames);
+                firstName = namesArray[0];
+                middlename = namesArray[1];
+                lastname = custDetails.Surname;
+            }
+            else
+            {
+                firstName = custDetails.Forenames;
+                lastname = custDetails.Surname;
+            }
+
+            string addressValue = string.Empty;
+            foreach (var personaddress in custDetails.Addresses)
+            {
+                if (personaddress.GpsAddressDetails != null)
                 {
-                    for (int i = 2; i < (customerNames.Length); i++)
-                    {
-                        builder.Append($"{customerNames[i]} ");
-                    }
-                    middlename = builder.ToString();
+                    var _address = personaddress.GpsAddressDetails;
+                    addressValue = $"{_address.Street} {_address.Area} {_address.District} {_address.Region}";
+                    _cbsLog.Debug($"{addressValue}");
                 }
             }
-
-            if (!string.IsNullOrEmpty(custDetails.FirstName))
+            string customerContact = string.Empty;
+            foreach (var contactNumber in custDetails.Contact.PhoneNumbers)
             {
-                firstName = custDetails.FirstName;
-            }
-            if (!string.IsNullOrEmpty(custDetails.MiddleName))
-            {
-                middlename = custDetails.FirstName;
-            }
-            if (!string.IsNullOrEmpty(custDetails.LastName))
-            {
-                lastname = custDetails.FirstName;
+                customerContact = contactNumber.PhoneNumber;
+                _cbsLog.Debug($"{customerContact}");
             }
 
             AccountDetails rtn = new AccountDetails
             {
                 AccountNumber = string.Format("{0}_{1}", accNumPrefix, searchValue),
-               // AccountNumber = "MLCM_" + searchValue,//set account number to prefix MLCM_
+                // AccountNumber = "MLCM_" + searchValue,//set account number to prefix MLCM_
 
                 //AccountTypeId =-1, // DecodeAccountType(flexAccountDetails.ACCTYPE),
                 CurrencyId = DecodeCurrency("GHS"),
@@ -563,28 +516,27 @@ namespace Veneka.Indigo.Integration.Fidelity
 
                 CBSAccountTypeId = "NotMapped", //DecodeAccType(flexAccountDetails.ACC, flexAccountDetails.ACCTYPE),
 
-                FirstName = string.IsNullOrEmpty(custDetails.FirstName) ? firstName : custDetails.FirstName,// custDetails.FirstName,
-                LastName = string.IsNullOrEmpty(custDetails.LastName) ? lastname : custDetails.LastName,//custDetails.LastName,
-                MiddleName = string.IsNullOrEmpty(custDetails.MiddleName) ? middlename : custDetails.MiddleName,//lastname,//custDetails.MiddleName,
-                CustomerIDNumber = string.IsNullOrEmpty(custDetails.PassportNo) ? searchValue : custDetails.PassportNo,
-                Address1 = string.Empty,//flexAccountDetails.ADDR1,
+                FirstName = firstName,// custDetails.FirstName,
+                LastName = lastname,//custDetails.LastName,
+                MiddleName = middlename,//lastname,//custDetails.MiddleName,
+                CustomerIDNumber = custDetails.NationalId,
+                Address1 = addressValue,//flexAccountDetails.ADDR1,
                 Address2 = string.Empty,
                 Address3 = string.Empty,
-                ContactNumber = string.Empty, //custDetails.Custpersonal.MOBNUM.ToString()
+                ContactNumber = customerContact, //custDetails.Custpersonal.MOBNUM.ToString()
                 IsCBSAccount = false
             };
 
             _cbsLog.Debug("CBSAccountTypeId==" + rtn.CBSAccountTypeId);
             //-------Start newly added  fields for NI migration----------------
             string dob = DateTime.Now.ToString();
-            if (custDetails.DateOfBirth != null)
+            if (custDetails != null)
             {
-
-                dob = custDetails.DateOfBirth.ToString();
+                dob = custDetails.BirthDate;
                 _cbsLog.Debug("Date of birth" + dob);
             }
 
-            string address = string.Empty;
+
             rtn.ProductFields = new List<ProductField>();
 
             foreach (var printField in printFields)
@@ -599,9 +551,9 @@ namespace Veneka.Indigo.Integration.Fidelity
                             _cbsLog.Debug("Date of birth" + dob);
                             break;
                         case "ind_sys_address":
-                            ((PrintStringField)printField).Value = address;
+                            ((PrintStringField)printField).Value = addressValue;
                             rtn.ProductFields.Add(new ProductField(printField));
-                            //_cbsLog.Debug("address" + response.adesc);
+                            _cbsLog.Debug("ind_sys_address" + addressValue);
                             break;
                         case "ind_sys_postcode":
                             ((PrintStringField)printField).Value = "0000";
@@ -617,6 +569,15 @@ namespace Veneka.Indigo.Integration.Fidelity
             }
 
             return rtn;
+        }
+
+        private string[] GetNames(string forenames)
+        {
+            var firstnameIndex = forenames.IndexOf(' ');
+            var firstName = forenames.Substring(0, firstnameIndex);
+            var othernames = forenames.Substring(firstnameIndex + 1);
+
+            return new string[] { firstName, othernames };
         }
 
         private int DecodeCurrency(string ccy)
