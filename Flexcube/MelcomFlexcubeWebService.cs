@@ -352,6 +352,7 @@ namespace Veneka.Indigo.Integration.Fidelity.Flexcube
                 lookUpAccountNo = customerDetails.AccountNumber;
                 cardNumber = customerDetails.CardNumber;
                 transactionCode = Module.OracleFlexcube.Utils.General.TransactionCode.GITC;
+                indigoReference = $"{transactionCode}{indigoReference}";
                 // _cbsLog.Debug($"Funding at branch {currBranchCode}");
                 //  branchOfAccToDebit = customerDetails.IsCBSAccountHolder ? branchCode : currBranchCode;
                 //branchOfAccToDebit = currBranchCode;//customerDetails.IsCBSAccountHolder ? branchCode : customerDetails.FundingDetails.BranchCode;
@@ -546,6 +547,7 @@ namespace Veneka.Indigo.Integration.Fidelity.Flexcube
                 transactionCode = Module.OracleFlexcube.Utils.General.TransactionCode.GITC;
                 lookUpAccountNo = customerDetails.AccountNumber;
                 cardNumber = customerDetails.CardNumber;
+                indigoReference = $"{transactionCode}{indigoReference}";
             }
             //string branchOfAccToDebit = customerDetails.IsCBSAccountHolder ? branchCode : customerDetails.FundingDetails.BranchCode;
             //if (!_flexMelcomRtService.CreateDebitTransactionFS(accountToDebit, branchOfAccToDebit, branchOfAccToDebit, indigoReference, ccy, customerDetails.FeeCharge.Value, MessageId, out flexcubeReference, out messages))

@@ -504,6 +504,7 @@ namespace Veneka.Indigo.Integration.Fidelity.Flexcube
                 transactionCode = Module.OracleFlexcube.Utils.General.TransactionCode.MITC;
                 lookUpAccountNo = customerDetails.AccountNumber;
                 cardNumber = customerDetails.CardNumber;
+                indigoReference = $"{transactionCode}{indigoReference}";
             }
             //string branchOfAccToDebit = customerDetails.IsCBSAccountHolder ? branchCode : customerDetails.FundingDetails.BranchCode;
             //if (!_flexMelcomRtService.CreateDebitTransactionFS(accountToDebit, branchOfAccToDebit, branchOfAccToDebit, indigoReference, ccy, customerDetails.FeeCharge.Value, MessageId, out flexcubeReference, out messages))

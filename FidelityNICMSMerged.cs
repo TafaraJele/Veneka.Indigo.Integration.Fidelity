@@ -183,7 +183,7 @@ namespace Veneka.Indigo.Integration.Fidelity
 
                 if (fimiService.LinkCardToAccountAndActive(customerDetails.CardId, int.Parse(customerDetails.CardReference), customerDetails.IssuerCode, fullname, customerDetails.AccountNumber,
                cms_account_type, int.Parse(DataSource.LookupDAL.LookupCurrencyISONumericCode(customerDetails.CurrencyId.Value)), customerDetails.CustomerIDNumber, dob,
-               address, postCode, comment, auditUserId, auditWorkStation, out responseMessage))
+               address, postCode, comment, auditUserId, auditWorkStation, out responseMessage, out PAN))
 
                     if (bankWorldService.CreateCard(customerDetails, card.card_expiry_date, cardType, cashLimit, address, serviceCode, languageId, out responseMessage))
 
@@ -216,10 +216,12 @@ namespace Veneka.Indigo.Integration.Fidelity
 
         public LinkResponse LinkCardToAccountAndActive(CustomerDetails customerDetails, ExternalSystemFields externalFields, IConfig config, int languageId, long auditUserId, string auditWorkStation, out string responseMessage)
         {
+            _cmsLog.Debug("Fidelity NI CMS Merged class Link card to account and activate");
             responseMessage = String.Empty;
 
             try
             {
+                _cmsLog.Debug("Pick the webservice configs");
                 WebServiceConfig webConfig = null;
                 if (config is WebServiceConfig)
                     webConfig = (WebServiceConfig)config;
@@ -282,7 +284,7 @@ namespace Veneka.Indigo.Integration.Fidelity
 
                 DateTime dob = DateTime.Now;
                 string address = String.Empty;
-                string postCode = String.Empty;
+                string postCode = String.Empty;               
 
                 if (customerDetails.ProductFields != null && customerDetails.ProductFields.Count > 0)
                 {
@@ -366,10 +368,13 @@ namespace Veneka.Indigo.Integration.Fidelity
 
                 if (fimiService.LinkCardToAccountAndActive(customerDetails.CardId, int.Parse(customerDetails.CardReference), customerDetails.IssuerCode, fullname, customerDetails.AccountNumber,
                cms_account_type, int.Parse(DataSource.LookupDAL.LookupCurrencyISONumericCode(customerDetails.CurrencyId.Value)), customerDetails.CustomerIDNumber, dob,
-               address, postCode, comment, auditUserId, auditWorkStation, out responseMessage))
+               address, postCode, comment, auditUserId, auditWorkStation, out responseMessage, out PAN))
+                   
+                    _cmsLog.Debug($"Update card number for card id {customerDetails.CardId}");
+                DataSource.CardsDAL.UpdateCardNumber(customerDetails.CardId, PAN, auditUserId, auditWorkStation);
 
 
-                    _cmsLog.Debug("PAN =" + PAN + "for customer=" + customerDetails.CardReference);
+                _cmsLog.Debug("PAN =" + PAN + "for customer=" + customerDetails.CardReference);
                 if (bankWorldService.CreateCard(customerDetails, card.card_expiry_date, cardType, cashLimit, address, serviceCode, languageId, out responseMessage))
 
                     return LinkResponse.SUCCESS;
