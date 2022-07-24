@@ -88,6 +88,12 @@ namespace Veneka.Indigo.Integration.Fidelity
             feeRefrenceNumber = string.Empty;
             if (customerDetails.FeeReferenceNumber == null)
             {
+                if (externalFields.Field.FirstOrDefault((KeyValuePair<string, string> i) => i.Key == "cbsProductCode").Key == null)
+                {
+                    throw new Exception(" CBS Product Code external field not found.");
+                }
+                string cbsProdCode = externalFields.Field["cbsProductCode"].ToUpper();
+
                 try
                 {
                     _cbsLog.Debug($"Calling Charge fee method in FidelityCBS.cs class {customerDetails.AccountNumber}");
@@ -98,7 +104,7 @@ namespace Veneka.Indigo.Integration.Fidelity
 
                     FlexcubeWebService service = new FlexcubeWebService((WebServiceConfig)config,  DataSource);
                     _cbsLog.Debug("Calling Charge fee service from FidelityCBS.cs class");
-                    if (service.ChargeFee(customerDetails, languageId, out responseMessage))
+                    if (service.ChargeFee(customerDetails, cbsProdCode, languageId, out responseMessage))
                     {
                         if (customerDetails.CardId > 0)
                            DataSource.CardsDAL.UpdateCardFeeReferenceNumber(customerDetails.CardId, customerDetails.FeeReferenceNumber, auditUserId, auditWorkstation);

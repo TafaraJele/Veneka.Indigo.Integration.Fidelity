@@ -232,7 +232,7 @@ namespace Veneka.Indigo.Integration.Fidelity.Flexcube
         /// <param name="languageId"></param>
         /// <param name="responseMessage"></param>
         /// <returns></returns>
-        public bool ChargeFee(CustomerDetails customerDetails, int languageId, out string responseMessage)
+        public bool ChargeFee(CustomerDetails customerDetails, string cbsProdCode, int languageId, out string responseMessage)
         {
             _flexRtService.LanguageId = languageId;
             List<Tuple<string, string>> messages;
@@ -297,7 +297,7 @@ namespace Veneka.Indigo.Integration.Fidelity.Flexcube
 
             string flexcubeReference;
            
-            if (!_flexRtService.CreateTransactionFS(customerDetails.AccountNumber, chargeBranchCode, branchCode, indigoReference, ccy, customerDetails.FeeCharge.Value, MessageId, out flexcubeReference, out messages))
+            if (!_flexRtService.CreateTransactionFS(cbsProdCode,customerDetails.AccountNumber, chargeBranchCode, branchCode, indigoReference, ccy, customerDetails.FeeCharge.Value, MessageId, out flexcubeReference, out messages))
             {
                 responseMessage = BuildHtmlMessage(messages);
                 return false;
