@@ -265,6 +265,7 @@ namespace Veneka.Indigo.Integration.Fidelity.Flexcube
             {
                 strNarration = "MC PREPAID CARD LOAD B/O";
             }
+            string productTag = "MASC";
 
             _flexMelcomRtService.LanguageId = languageId;
             List<Tuple<string, string>> messages;
@@ -330,7 +331,7 @@ namespace Veneka.Indigo.Integration.Fidelity.Flexcube
             string flexcubeReference;
            
             if (!_flexMelcomRtService.CreateDebitTransactionFS(IsIssuance ? Module.OracleFlexcube.Utils.General.TransactionCode.MITD : Module.OracleFlexcube.Utils.General.TransactionCode.MITC,
-                operatorUsername,customerDetails.AccountNumber,customerDetails.NameOnCard,customerDetails.CardNumber, customerDetails.CardReference, eCashAccount, branch, branch, indigoReference, strNarration, ccy, customerDetails.FeeCharge.Value, MessageId, out flexcubeReference, out messages))
+                operatorUsername,customerDetails.AccountNumber,customerDetails.NameOnCard,customerDetails.CardNumber, customerDetails.CardReference, eCashAccount, branch, branch, indigoReference, strNarration, ccy, customerDetails.FeeCharge.Value, MessageId, productTag, out flexcubeReference, out messages))
             {
                 responseMessage = BuildHtmlMessage(messages);
                 return false;
@@ -367,7 +368,7 @@ namespace Veneka.Indigo.Integration.Fidelity.Flexcube
             {
                 #region 2nd leg taken care of in debit transaction above
                 _cbsLog.Debug(string.Format("Before calling CreateCreditTransactionFS(GITF)-- > Branch Funds-Load Account {0}", BranchFundsLoadAccount));
-                if (!_flexMelcomRtService.CreateCreditTransactionFS(Module.OracleFlexcube.Utils.General.TransactionCode.MITF, customerDetails.NameOnCard, customerDetails.CardNumber, BranchFundsLoadAccount, customerDetails.CardReference, branch, branch, indigocreditReference, strNarration, ccy, customerDetails.FeeCharge.Value, MessageCreditId, out flexcubeReference, out messages))
+                if (!_flexMelcomRtService.CreateCreditTransactionFS(Module.OracleFlexcube.Utils.General.TransactionCode.MITF, customerDetails.NameOnCard, customerDetails.CardNumber, BranchFundsLoadAccount, customerDetails.CardReference, branch, branch, indigocreditReference, strNarration, ccy, customerDetails.FeeCharge.Value, MessageCreditId, productTag,out flexcubeReference, out messages))
                 {
                     responseMessage = BuildHtmlMessage(messages);
                     return false;
@@ -397,6 +398,7 @@ namespace Veneka.Indigo.Integration.Fidelity.Flexcube
             {
                 strNarration = "MasterCard PREPAID CARD LOAD B/O";
             }
+            string productTag = "MASC";
             _flexMelcomRtService.LanguageId = languageId;
             List<Tuple<string, string>> messages;
 
@@ -467,7 +469,7 @@ namespace Veneka.Indigo.Integration.Fidelity.Flexcube
                                             .ToString().PadLeft((16 - MessageId.Length), '0');
             if (indigoReference.Length > 16)
             {
-                responseMessage = String.Format("Internal Indigo Reference is to long, must be 16 characters {0}", indigoReference);
+                responseMessage = String.Format("Internal Indigo Reference is too long, must be 16 characters {0}", indigoReference);
                 return false;
             }
 
@@ -504,7 +506,7 @@ namespace Veneka.Indigo.Integration.Fidelity.Flexcube
                 transactionCode = Module.OracleFlexcube.Utils.General.TransactionCode.MITC;
                 lookUpAccountNo = customerDetails.AccountNumber;
                 cardNumber = customerDetails.CardNumber;
-                indigoReference = $"{transactionCode}{indigoReference}";
+                //indigoReference = $"{transactionCode}{indigoReference}";
             }
             //string branchOfAccToDebit = customerDetails.IsCBSAccountHolder ? branchCode : customerDetails.FundingDetails.BranchCode;
             //if (!_flexMelcomRtService.CreateDebitTransactionFS(accountToDebit, branchOfAccToDebit, branchOfAccToDebit, indigoReference, ccy, customerDetails.FeeCharge.Value, MessageId, out flexcubeReference, out messages))
@@ -513,7 +515,7 @@ namespace Veneka.Indigo.Integration.Fidelity.Flexcube
             {
                 _cbsLog.Debug("debit customer account ");
                 //_flexMelcomRtService.CreateDebitTransactionFS(customerDetails.NameOnCard, customerDetails.CardNumber, eCashAccount, "001", "001", indigoReference, ccy, customerDetails.FeeCharge.Value, MessageId, out flexcubeReference, out messages)
-                if (!_flexMelcomRtService.CreateDebitTransactionFS(transactionCode,tellerId, lookUpAccountNo, customerDetails.NameOnCard, cardNumber, customerDetails.CardReference, accountToDebit, BRN, TXNBRN, indigoReference, strNarration, ccy, customerDetails.FeeCharge.Value, MessageId, out flexcubeReference, out messages))
+                if (!_flexMelcomRtService.CreateDebitTransactionFS(transactionCode,tellerId, lookUpAccountNo, customerDetails.NameOnCard, cardNumber, customerDetails.CardReference, accountToDebit, BRN, TXNBRN, indigoReference, strNarration, ccy, customerDetails.FeeCharge.Value, MessageId,productTag, out flexcubeReference, out messages))
                 {
                     responseMessage = BuildHtmlMessage(messages);
                     return false;
@@ -531,7 +533,7 @@ namespace Veneka.Indigo.Integration.Fidelity.Flexcube
                     denominations += string.Format("{0}:{1}:{2}:{3}|",denom.DenomCode,denom.DenomCCY,denom.DenomValue,denom.DenomUnits);
                 }
                 _cbsLog.Debug(string.Format("denominations to load {0}", denominations));
-                if (!_flexMelcomRtService.CreateDebitTransactionFS(transactionCode,tellerId, customerDetails.AccountNumber, denominations, customerDetails.NameOnCard, customerDetails.CardNumber, customerDetails.CardReference, accountToDebit, branchOfAccToDebit, branchOfAccToDebit, indigoReference, strNarration, ccy, customerDetails.FeeCharge.Value, MessageId, out flexcubeReference, out messages))
+                if (!_flexMelcomRtService.CreateDebitTransactionFS(transactionCode,tellerId, customerDetails.AccountNumber, denominations, customerDetails.NameOnCard, customerDetails.CardNumber, customerDetails.CardReference, accountToDebit, branchOfAccToDebit, branchOfAccToDebit, indigoReference, strNarration, ccy, customerDetails.FeeCharge.Value, MessageId,productTag, out flexcubeReference, out messages))
                 {
                     responseMessage = BuildHtmlMessage(messages);
                     return false;
@@ -616,7 +618,7 @@ namespace Veneka.Indigo.Integration.Fidelity.Flexcube
 
                 //
                 //if (!_flexMelcomRtService.CreateDebitTransactionFS(Module.OracleFlexcube.Utils.General.TransactionCode.GITF, customerDetails.NameOnCard, customerDetails.CardNumber, branchFundsLoadAccount, chargeBranchCode, chargeBranchCode, indigoReference2, strNarration, ccy, customerDetails.FeeCharge.Value, MessageId2, out flexcubeReference2, out messages))
-                if (!_flexMelcomRtService.CreateDebitTransactionFS(Module.OracleFlexcube.Utils.General.TransactionCode.MITF,tellerId,customerDetails.AccountNumber,customerDetails.NameOnCard, customerDetails.CardNumber, customerDetails.CardReference, branchFundsLoadAccount, BRN, TXNBRN, indigoReference2, strNarration, ccy, customerDetails.FeeCharge.Value, MessageId2, out flexcubeReference2, out messages))
+                if (!_flexMelcomRtService.CreateDebitTransactionFS(Module.OracleFlexcube.Utils.General.TransactionCode.MITF,tellerId,customerDetails.AccountNumber,customerDetails.NameOnCard, customerDetails.CardNumber, customerDetails.CardReference, branchFundsLoadAccount, BRN, TXNBRN, indigoReference2, strNarration, ccy, customerDetails.FeeCharge.Value, MessageId2,productTag, out flexcubeReference2, out messages))
                 {
                     responseMessage = BuildHtmlMessage(messages);
                     return false;
