@@ -98,7 +98,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>refs\Veneka.Module.IntegrationDataControl.dll</HintPath>
     </Reference>
-    <Reference Include="Veneka.Module.OracleFlexcube">
+    <Reference Include="Veneka.Module.OracleFlexcube, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>refs\Veneka.Module.OracleFlexcube.dll</HintPath>
     </Reference>
   </ItemGroup>
