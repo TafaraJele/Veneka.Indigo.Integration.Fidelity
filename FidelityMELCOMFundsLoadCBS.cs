@@ -39,6 +39,8 @@ namespace Veneka.Indigo.Integration.Fidelity
             //eCashAccount
             string eCashAccount = string.Empty;
 
+            string productTag = "MEL";
+
             try
             {
 
@@ -91,7 +93,6 @@ namespace Veneka.Indigo.Integration.Fidelity
                 _cbsLog.Debug("FeeReferencenumber =" + customerDetails.FeeReferenceNumber);
                 if (customerDetails.FeeReferenceNumber == null)
                 {
-
                     _cbsLog.Debug("into Charge fee method in FidelityMELCOMCBS.cs class");
                     responseMessage = String.Empty;
 
@@ -105,8 +106,7 @@ namespace Veneka.Indigo.Integration.Fidelity
                     string strBranchCode = DataSource.LookupDAL.LookupBranchCode(customerDetails.BranchId);
                     int branchCategory = DataSource.LookupDAL.LookupBranchCategory(customerDetails.BranchId);
                     _cbsLog.Debug("Branch Code : " + strBranchCode);
-
-                    
+                                       
                     
                     //if (int.TryParse(customerDetails.BranchCode, out currentBranch))
                     if (int.TryParse(strBranchCode, out currentBranch))
@@ -119,7 +119,7 @@ namespace Veneka.Indigo.Integration.Fidelity
                             _cbsLog.Debug(string.Format("Melcom branch ({0}), call appropriate charge fee service", strBranchCode));
                             string debitAcc = customerDetails.IsCBSAccountHolder ? customerDetails.AccountNumber : eCashAccount;
                             _cbsLog.Debug(string.Format("Debit Acc {0}, Fundsload Acc {1}", tellerAccount, fundsLoadAccountFidelity));
-                            if (service.ChargeFee(customerDetails, username, debitAcc, branchFundsLoadAccount, languageId,false, out responseMessage))
+                            if (service.ChargeFee(customerDetails, username, debitAcc, branchFundsLoadAccount, languageId,false, productTag, out responseMessage))
                             {
                                 if (customerDetails.CardId > 0)
                                     DataSource.CardsDAL.UpdateCardFeeReferenceNumber(customerDetails.CardId, customerDetails.FeeReferenceNumber, auditUserId, auditWorkstation);
@@ -135,7 +135,7 @@ namespace Veneka.Indigo.Integration.Fidelity
                             string tellerId = DataSource.LookupDAL.LookupBranchTellerIDByUserId(auditUserId);
                             _cbsLog.Debug(string.Format("Fidelity branch ({0}), call appropriate charge fee service", strBranchCode));
                             _cbsLog.Debug(string.Format("Teller Acc {0}, fundsload acc {1}", tellerAccount, fundsLoadAccountFidelity));
-                            if (service.ChargeFeeAtFidelityBank(customerDetails, tellerId, tellerAccount, fundsLoadAccountFidelity, branchFundsLoadAccount, languageId,false, out responseMessage))
+                            if (service.ChargeFeeAtFidelityBank(customerDetails, tellerId, tellerAccount, fundsLoadAccountFidelity, branchFundsLoadAccount, languageId,false, productTag, out responseMessage))
                             {
                                 if (customerDetails.CardId > 0)
                                     DataSource.CardsDAL.UpdateCardFeeReferenceNumber(customerDetails.CardId, customerDetails.FeeReferenceNumber, auditUserId, auditWorkstation);

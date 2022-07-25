@@ -114,7 +114,7 @@ namespace Veneka.Indigo.Integration.Fidelity
                             //is this fidelity branch
                             _cbsLog.Debug(string.Format("Fidelity branch ({0}), call appropriate charge fee service", strBranchCode));
                             _cbsLog.Debug(string.Format("Teller Acc {0}, fundsload acc {1}", tellerAccount, fundsLoadAccountFidelity));
-                            if (service.ChargeFeeAtFidelityBank(customerDetails,tellerId, tellerAccount, fundsLoadAccountFidelity, branchFundsLoadAccount, languageId,false, out responseMessage))
+                            if (service.ChargeFeeAtFidelityBank(customerDetails,tellerId, tellerAccount, fundsLoadAccountFidelity, branchFundsLoadAccount, languageId,false,out responseMessage))
                             {
                                 if (customerDetails.CardId > 0)
                                     DataSource.CardsDAL.UpdateCardFeeReferenceNumber(customerDetails.CardId, customerDetails.FeeReferenceNumber, auditUserId, auditWorkstation);

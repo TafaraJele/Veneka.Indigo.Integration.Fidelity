@@ -194,6 +194,7 @@ namespace Veneka.Indigo.Integration.Fidelity
         }
         public bool ChargeFee_old(CustomerDetails customerDetails, ExternalSystemFields externalFields, IConfig config, int languageId, long auditUserId, string auditWorkstation, out string feeRefrenceNumber, out string responseMessage)
         {
+            string productTag = "MASC";
             var item = externalFields.Field.FirstOrDefault(i => i.Key == "eCashAccount");
             if (item.Key == null)
             {
@@ -221,7 +222,7 @@ namespace Veneka.Indigo.Integration.Fidelity
 
                     MelcomFlexcubeWebService service = new MelcomFlexcubeWebService((WebServiceConfig)config, DataSource);
                     _cbsLog.Debug("Calling Charge fee service from FidelityCBS.cs class");
-                    if (service.ChargeFee(customerDetails,"", eCashAccount, cardIssuingAccount, languageId,true, out responseMessage))
+                    if (service.ChargeFee(customerDetails,"", eCashAccount, cardIssuingAccount, languageId,true,productTag, out responseMessage))
                     {
                         if (customerDetails.CardId > 0)
                             DataSource.CardsDAL.UpdateCardFeeReferenceNumber(customerDetails.CardId, customerDetails.FeeReferenceNumber, auditUserId, auditWorkstation);
@@ -231,8 +232,6 @@ namespace Veneka.Indigo.Integration.Fidelity
                     else
                         feeRefrenceNumber = string.Empty;
                     return false;
-
-
 
                 }
                 catch (System.ServiceModel.EndpointNotFoundException endpointException)

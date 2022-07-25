@@ -39,6 +39,7 @@ namespace Veneka.Indigo.Integration.Fidelity
 
             string cardIssuingAccountMelcom = string.Empty;
             string cardIssuingAccountFidelity = string.Empty;
+            string productTag = "MEL";
 
             try
             {
@@ -135,7 +136,7 @@ namespace Veneka.Indigo.Integration.Fidelity
                             string username = DataSource.LookupDAL.LookupUserNameById(auditUserId);
                             _cbsLog.Debug(string.Format("UserID {0},Teller ID  - {1}", auditUserId, username)); 
 
-                            if (service.ChargeFee(customerDetails, username, accountToDebit, cardIssuingAccountMelcom, languageId, true, out responseMessage))
+                            if (service.ChargeFee(customerDetails, username, accountToDebit, cardIssuingAccountMelcom, languageId, true, productTag, out responseMessage))
                             {
                                 if (customerDetails.CardId > 0)
                                     DataSource.CardsDAL.UpdateCardFeeReferenceNumber(customerDetails.CardId, customerDetails.FeeReferenceNumber, auditUserId, auditWorkstation);
@@ -164,7 +165,7 @@ namespace Veneka.Indigo.Integration.Fidelity
                             var data = JsonConvert.SerializeObject(customerDetails);
 
                             _cbsLog.Debug($"customerDetails{data} tellerId{tellerId} tellerAccount{tellerAccount} cardIssuingAccountFidelity{cardIssuingAccountFidelity} branchFundsLoadAccount{branchFundsLoadAccount} languageId{languageId}");
-                            if (service.ChargeFeeAtFidelityBank(customerDetails, tellerId, tellerAccount, cardIssuingAccountFidelity, branchFundsLoadAccount, languageId, true, out responseMessage))
+                            if (service.ChargeFeeAtFidelityBank(customerDetails, tellerId, tellerAccount, cardIssuingAccountFidelity, branchFundsLoadAccount, languageId, true, productTag, out responseMessage))
                             {
                                 if (customerDetails.CardId > 0)
                                     DataSource.CardsDAL.UpdateCardFeeReferenceNumber(customerDetails.CardId, customerDetails.FeeReferenceNumber, auditUserId, auditWorkstation);
@@ -226,6 +227,9 @@ namespace Veneka.Indigo.Integration.Fidelity
             }
             string cardIssuingAccount = externalFields.Field["cardIssuingAccount"];
             feeRefrenceNumber = string.Empty;
+
+            string productTag = "MEL";
+
             if (customerDetails.FeeReferenceNumber == null)
             {
                 try
@@ -240,7 +244,7 @@ namespace Veneka.Indigo.Integration.Fidelity
 
                     MelcomFlexcubeWebService service = new MelcomFlexcubeWebService((WebServiceConfig)config, DataSource);
                     _cbsLog.Debug("Calling Charge fee service from FidelityCBS.cs class");
-                    if (service.ChargeFee(customerDetails,"", eCashAccount, cardIssuingAccount, languageId,true, out responseMessage))
+                    if (service.ChargeFee(customerDetails,"", eCashAccount, cardIssuingAccount, languageId,true, productTag, out responseMessage))
                     {
                         if (customerDetails.CardId > 0)
                             DataSource.CardsDAL.UpdateCardFeeReferenceNumber(customerDetails.CardId, customerDetails.FeeReferenceNumber, auditUserId, auditWorkstation);
