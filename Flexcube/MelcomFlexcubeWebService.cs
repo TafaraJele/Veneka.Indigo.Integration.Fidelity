@@ -341,8 +341,8 @@ namespace Veneka.Indigo.Integration.Fidelity.Flexcube
                BRN = "000";
                 TXNBRN = customerDetails.IsCBSAccountHolder ? branchCode : "001";
                 lookUpAccountNo = customerDetails.AdditionalAccountNumber;
-                cardNumber = DataSource.CardsDAL.FetchPanByRefNumber(customerDetails.CardNumber, 1, string.Empty);
-                _cbsLog.Debug($"Fetched Card {cardNumber.Substring(0, 4) + "****" + cardNumber.Substring(cardNumber.Length - 4, 4) }, with ref {customerDetails.CardNumber}");
+                cardNumber = DataSource.CardsDAL.FetchPanByRefNumber(customerDetails.CardReference, 1, string.Empty);
+                _cbsLog.Debug($"Fetched Card {cardNumber.Substring(0, 4) + "****" + cardNumber.Substring(cardNumber.Length - 4, 4) }, with ref {customerDetails.CardReference}");
 
             }
             else
