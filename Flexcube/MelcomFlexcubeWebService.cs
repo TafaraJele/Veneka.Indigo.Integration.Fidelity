@@ -533,8 +533,8 @@ namespace Veneka.Indigo.Integration.Fidelity.Flexcube
                     transactionCode = Module.OracleFlexcube.Utils.General.TransactionCode.GITD;
                     lookUpAccountNo = customerDetails.AdditionalAccountNumber;
 
-                 cardNumber = DataSource.CardsDAL.FetchPanByRefNumber(customerDetails.CardNumber, 1,string.Empty);
-                _cbsLog.Debug($"Fetched Card {cardNumber.Substring(0,4) + "****" + cardNumber.Substring(cardNumber.Length - 4, 4) }, with ref {customerDetails.CardNumber}");
+                 cardNumber = DataSource.CardsDAL.FetchPanByRefNumber(customerDetails.CardReference, 1,string.Empty);
+                _cbsLog.Debug($"Fetched Card {cardNumber.Substring(0,4) + "****" + cardNumber.Substring(cardNumber.Length - 4, 4) }, with ref {customerDetails.CardReference}");
             }
             else
             {
@@ -573,7 +573,7 @@ namespace Veneka.Indigo.Integration.Fidelity.Flexcube
                     denominations += string.Format("{0}:{1}:{2}:{3}|",denom.DenomCode,denom.DenomCCY,denom.DenomValue,denom.DenomUnits);
                 }
                 _cbsLog.Debug(string.Format("denominations to load {0}", denominations));
-                if (!_flexMelcomRtService.CreateDebitTransactionFS(transactionCode,tellerId, customerDetails.AccountNumber, denominations, customerDetails.NameOnCard, lookUpAccountNo, customerDetails.CardReference, accountToDebit, BRN, BRN, indigoReference, strNarration, ccy, customerDetails.FeeCharge.Value, MessageId, IsIssuance, productTag,out flexcubeReference, out messages))
+                if (!_flexMelcomRtService.CreateDebitTransactionFS(transactionCode,tellerId, customerDetails.AccountNumber, denominations, customerDetails.NameOnCard, cardNumber, customerDetails.CardReference, accountToDebit, BRN, BRN, indigoReference, strNarration, ccy, customerDetails.FeeCharge.Value, MessageId, IsIssuance, productTag,out flexcubeReference, out messages))
                 {
                     responseMessage = BuildHtmlMessage(messages);
                     return false;
