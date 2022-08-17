@@ -115,6 +115,7 @@
     <Compile Include="DAL\ValidationDAL.cs" />
     <Compile Include="FidelityCBS.cs" />
     <Compile Include="FidelityCR2CMS.cs" />
+    <Compile Include="FidelityCredtCardCBS.cs" />
     <Compile Include="FidelityGOGCBS.cs" />
     <Compile Include="FidelityGoGFundsLoadCBS.cs" />
     <Compile Include="FidelityMasterCardCBS.cs" />
@@ -126,6 +127,7 @@
     <Compile Include="FidelityCPS.cs" />
     <Compile Include="FidelityHSM.cs" />
     <Compile Include="FidelityThreedSecure.cs" />
+    <Compile Include="Flexcube\CreditCardFlexcubeWebService.cs" />
     <Compile Include="Flexcube\FlexcubeWebService.cs" />
     <Compile Include="Flexcube\MasterCardFlexcubeWebService.cs" />
     <Compile Include="Flexcube\MelcomFlexcubeWebService.cs" />
